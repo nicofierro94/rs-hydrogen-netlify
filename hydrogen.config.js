@@ -7,8 +7,8 @@ import {
 export default defineConfig({
   routes: import.meta.globEager('./src/routes/**/*.server.[jt](s|sx)'),
   shopify: {
-    storeDomain: 'hydrogen-preview.myshopify.com',
-    storefrontToken: '3b580e70970c4528da70c98e097c2fa0',
+    storeDomain: 'websystem-m6beds-staging.myshopify.com',
+    storefrontToken: '839be77f65261df3b7e6a461d15c3b32',
     storefrontApiVersion: '2022-07',
   },
   session: CookieSessionStorage('__session', {
