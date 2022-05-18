@@ -1,7 +1,7 @@
 import {useShop, useShopQuery, Seo, useRouteParams} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import ProductDetails from '../../components/ProductDetails.client';
+import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
 import Layout from '../../components/Layout.server';
 
@@ -22,6 +22,16 @@ export default function Product({country = {isoCode: 'US'}}) {
     preload: true,
   });
 
+  const {
+    data: {product2},
+  } = useShopQuery({
+    query: QUERY2,
+    variables: {
+      handle
+    },
+    preload: true,
+  })
+
   if (!product) {
     return <NotFound />;
   }
@@ -33,6 +43,26 @@ export default function Product({country = {isoCode: 'US'}}) {
     </Layout>
   );
 }
+
+const QUERY2 = gql`
+  query product(
+    $handle: String!
+  ) {
+    product2: product(handle: $handle) {
+      handle
+      title
+      metafields(first: 50) {
+        edges {
+          node {
+            namespace
+            key
+            value
+          }
+        }
+      }
+    }
+  }
+`;
 
 const QUERY = gql`
   query product(

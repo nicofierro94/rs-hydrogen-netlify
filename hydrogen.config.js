@@ -9,7 +9,8 @@ export default defineConfig({
   shopify: {
     storeDomain: 'websystem-m6beds-staging.myshopify.com',
     storefrontToken: '839be77f65261df3b7e6a461d15c3b32',
-    storefrontApiVersion: '2022-07',
+    storefrontApiVersion: '2022-04',
+    // storefrontApiVersion: 'unstable',
   },
   session: CookieSessionStorage('__session', {
     path: '/',
