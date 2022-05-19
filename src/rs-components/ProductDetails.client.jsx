@@ -5,86 +5,104 @@ import ShareIcon from "../assets/icons/ShareIcon"
 import ExclamationIcon from "../assets/icons/ExclamationIcon"
 import SettingsIcon from "../assets/icons/SettingsIcon"
 import TickIcon from "../assets/icons/TickIcon"
+import { useState } from "react"
 
 export default function ProductDetails({ product }) {
+    const medias = product.media.edges;
+    const priceRange = product.priceRange;
+    const variants = product.variants.edges;
+
+    const [activeImage, setActiveImage] = useState(product.featuredImage.url);
+    const [activePosition, setActivePosition] = useState(0);
+    const [selectedVariant, setSelectedVariant] = useState(variants[1].node.id);
+
+    // TODO: improve
+    const currencyCodes = []
+    currencyCodes['GBP'] = '£'
+
+    const changeActiveImage = (media, i) => {
+        media && setActiveImage(media.node.image.url);
+        if (i >= 0 && i <= medias.length - 1) setActivePosition(i);
+    }
+
+    const nextActiveImage = () => {
+        let newPosition = activePosition + 1;
+        if (activePosition == medias.length - 1) newPosition = 0;
+        setActivePosition(newPosition);
+        changeActiveImage(medias[newPosition]);
+    }
+
+    const backActiveImage = () => {
+        let newPosition = activePosition - 1;
+        if (activePosition == 0) newPosition = medias.length + 1;
+        setActivePosition(newPosition);
+        changeActiveImage(medias[newPosition]);
+    }
+
     return (
         <>
-            <div className="breadcrumb">Home  ›  Alstons Upholstery  ›  Lowry & Adelphi  ›  Adelphi Grand Sofa</div>
+            <div className="breadcrumb">Home  ›  TODO  ›  TODO</div>
             <div className="product-container">
                 <div className="product-info">
                     <div className="carrousel">
-                        <span className="full-size"><FullSizeIcon /></span>
-                        <span className="arrow-left"><ArrowLeftIcon /></span>
-                        <span className="arrow-right"><ArrowRightIcon /></span>
+                        <img src={activeImage} width="100%" height="100%" />
+                        <span className="full-size cross circle"><FullSizeIcon /></span>
+                        <span className="arrow-left circle" onClick={backActiveImage}><ArrowLeftIcon /></span>
+                        <span className="arrow-right circle" onClick={nextActiveImage}><ArrowRightIcon /></span>
                     </div>
                     <div className="images-list">
-                        <div className="images-item"></div>
-                        <div className="images-item"></div>
-                        <div className="images-item"></div>
-                        <div className="images-item"></div>
-                        <div className="images-item"></div>
+                        {Array.from(Array(5)).map((_, i) =>
+                            <div key={i} className="images-item" onClick={() => changeActiveImage(medias[i], i)}>
+                                {medias[i] && <img src={medias[i].node.image.url} width="100%" height="100%" />}
+                            </div>
+                        )}
                     </div>
                     <span className="share-button">Share <span><ShareIcon /></span></span>
                     <div className="overview">
                         <h2>Overview</h2>
-                        <p>With compact scroll arms, deep cushioning and elegantly piped tailoring, the design is as classic as it is contemporary. Luxurious chenille’s and velvet fabrics work perfectly with a choice of fashionable legs that add a personal touch of indulgence and style.</p>
+                        {/* <p dangerouslySetInnerHTML={{__html: product.descriptionHtml}}></p> */}
+                        <p>{product.description}</p>
                     </div>
                 </div>
                 <div className="product-options">
-                    <h2>Adelphi Grand Sofa Large Square - W92 x D92cm</h2>
-                    <div className="breadcrumb">› Beautiful Home Collections</div>
-                    <div className="breadcrumb">› Fabric Bedframes</div>
+                    <h2>{product.title}</h2>
+                    <div className="breadcrumb">› TODO</div>
+                    <div className="breadcrumb">› TODO</div>
                     <div className="price">
-                        <span>£449.00 - £560.00</span>
-                        <p>Availability: 10 - 12 week</p>
+                        <span>
+                            {priceRange.minVariantPrice.amount == priceRange.maxVariantPrice.amount ?
+                                `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount}`
+                                :
+                                `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount} - ${currencyCodes[priceRange.maxVariantPrice.currencyCode]}${priceRange.maxVariantPrice.amount}`
+                            }
+
+                        </span>
+                        <p>Availability: TODO</p>
                     </div>
                     <div className="variants">
-                        <div className="variant-item selected">
-                            <div>
-                                <span>In Stock Option 1</span>
-                                <p>£449.00</p>
-                            </div>
-                            <span className="exclamation-circle">
-                                <ExclamationIcon />
-                            </span>
-                        </div>
-                        <div className="variant-item">
-                            <div>
-                                <span>In Stock Option 1</span>
-                                <p>£449.00</p>
-                            </div>
-                            <span className="exclamation-circle">
-                                <ExclamationIcon />
-                            </span>
-                        </div>
-                        <div className="variant-item">
-                            <div>
-                                <span>In Stock Option 1</span>
-                                <p>£449.00</p>
-                            </div>
-                            <span className="exclamation-circle">
-                                <ExclamationIcon />
-                            </span>
-                        </div>
-                        <div className="variant-item">
-                            <div>
-                                <span>In Stock Option 1</span>
-                                <p>£449.00</p>
-                            </div>
-                            <span className="exclamation-circle">
-                                <ExclamationIcon />
-                            </span>
-                        </div>
+
+                        {variants.map((v, i) => {
+                            if (v.node.title != 'DefaultVariant') return (
+                                <div className={`variant-item ${selectedVariant == v.node.id && 'selected'}`}>
+                                    <div>
+                                        <span>In Stock Option {i}</span>
+                                        <p>{currencyCodes[v.node.priceV2.currencyCode]}{v.node.priceV2.amount}</p>
+                                    </div>
+                                    <span className="exclamation-circle">
+                                        <ExclamationIcon />
+                                    </span>
+                                </div>)
+                        })}
                     </div>
                     <div className="extra-options">
                         <p>Extra Options</p>
-                        <label class="container">
-                            Add:  3' protector - 12 year guarantee  £31.99
+                        <label className="container">
+                            TODO
                             <input type="checkbox" checked onChange={() => { }} />
                             <span className="checkmark"></span>
                         </label>
-                        <label class="container">
-                            Recycle my old Sofa
+                        <label className="container">
+                            TODO
                             <input type="checkbox" onChange={() => { }} />
                             <span className="checkmark"></span>
                         </label>

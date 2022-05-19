@@ -1,17 +1,16 @@
-import {useShop, useShopQuery, Seo, useRouteParams} from '@shopify/hydrogen';
+import { useShop, useShopQuery, Seo, useRouteParams } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-
+import { useEffect, useState } from 'react'
 import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
 import Layout from '../../components/Layout.server';
 
-export default function Product({country = {isoCode: 'US'}}) {
-  const {handle} = useRouteParams();
-
-  const {languageCode} = useShop();
+export default function Product({ country = { isoCode: 'US' } }) {
+  const { handle } = useRouteParams();
+  const { languageCode } = useShop();
 
   const {
-    data: {product},
+    data: { product },
   } = useShopQuery({
     query: QUERY,
     variables: {
@@ -22,18 +21,35 @@ export default function Product({country = {isoCode: 'US'}}) {
     preload: true,
   });
 
-  const {
-    data: {product2},
-  } = useShopQuery({
-    query: QUERY2,
-    variables: {
-      handle
-    },
-    preload: true,
-  })
-
   if (!product) {
     return <NotFound />;
+  }
+  else {
+    const breadcrumb = product.metafields.edges.filter(m => m.node.namespace == "breadcrumb");
+    const brandId = breadcrumb.filter(b => b.node.key == "brandId");
+    const productRangeId = breadcrumb.filter(b => b.node.key == "productRangeId");
+
+    console.log(product.variants.edges[0].node)
+
+    // const {
+    //   data: { brand },
+    // } = useShopQuery({
+    //   query: QUERY_BRAND,
+    //   variables: {
+    //     brandId,
+    //   },
+    //   preload: true,
+    // })
+
+    // const {
+    //   data: { pr },
+    // } = useShopQuery({
+    //   query: QUERY_PR,
+    //   variables: {
+    //     productRangeId,
+    //   },
+    //   preload: true,
+    // })
   }
 
   return (
@@ -44,25 +60,13 @@ export default function Product({country = {isoCode: 'US'}}) {
   );
 }
 
-const QUERY2 = gql`
-  query product(
-    $handle: String!
-  ) {
-    product2: product(handle: $handle) {
-      handle
-      title
-      metafields(first: 50) {
-        edges {
-          node {
-            namespace
-            key
-            value
-          }
-        }
-      }
-    }
-  }
-`;
+// const QUERYBRAND = gql`
+//   query brand(
+//     $brandId: 
+//   )
+// `;
+
+// const QUERYPR = gql``;
 
 const QUERY = gql`
   query product(

@@ -33,19 +33,48 @@ $green       : #61B22C;
                 position: absolute;
                 right   : 3%;
                 top     : 4%;
+                cursor  : pointer;
             }
 
             .arrow-left {
                 position: absolute;
                 left    : 3%;
-                bottom  : 4%;
+                bottom  : 0%;
+                cursor  : pointer;
             }
 
             .arrow-right {
                 position: absolute;
                 right   : 3%;
-                bottom  : 4%;
+                bottom  : 0%;
+                cursor  : pointer;
             }
+
+            .circle {
+                height          : 35px;
+                width           : 35px;
+                background-color: #FFFFFF;
+                border-radius   : 50%;
+                display         : flex;
+                align-items     : center;
+                padding-left    : 8.5px;
+                padding-top     : 0.5px;
+                // border: 1px solid $grey-letters;
+
+                opacity: 0.5;
+
+                &.cross {
+                    height      : 35px;
+                    width       : 35px;
+                    padding-left: 9.5px;
+                    padding-top : 1px;
+                }
+            }
+
+            .circle:hover {
+                opacity: 0.55;
+            }
+
         }
 
         .images-list {
@@ -54,10 +83,15 @@ $green       : #61B22C;
             padding-top    : 3%;
 
             .images-item {
-                min-width       : 18%;
-                min-height      : 80px;
-                background-color: #F8F8F8;
-                border-radius   : 2px;
+                width              : 18%;
+                min-height         : 80px;
+                // background-color: #F8F8F8;
+                border-radius      : 2px;
+            }
+
+            .images-item:hover {
+                opacity: 0.8;
+                cursor : pointer;
             }
         }
 
@@ -91,6 +125,13 @@ $green       : #61B22C;
             letter-spacing: 2px;
 
             h2 {
+                font-size    : 25px;
+                line-height  : 16px;
+                font-weight  : 300;
+                margin-bottom: 3%;
+            }
+
+            h3 {
                 font-size    : 25px;
                 line-height  : 16px;
                 font-weight  : 300;
@@ -194,6 +235,11 @@ $green       : #61B22C;
                     display      : flex;
                 }
             }
+
+            .variant-item:hover {
+                cursor : pointer;
+                opacity: 1;
+            }
         }
 
         .extra-options {
@@ -294,6 +340,10 @@ $green       : #61B22C;
             }
         }
 
+        .customize-button:hover {
+            opacity: 0.7;
+        }
+
         .black-button {
             cursor          : pointer;
             margin-top      : 3%;
@@ -305,7 +355,11 @@ $green       : #61B22C;
             letter-spacing  : 1.5px;
             width           : 100%;
             background-color: $black-icon;
-            color           : #FFFFFF
+            color           : #FFFFFF;
+        }
+
+        .black-button:hover {
+            opacity: 0.7;
         }
 
         .shop-secure {
