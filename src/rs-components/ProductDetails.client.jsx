@@ -5,7 +5,8 @@ import ShareIcon from "../assets/icons/ShareIcon"
 import ExclamationIcon from "../assets/icons/ExclamationIcon"
 import SettingsIcon from "../assets/icons/SettingsIcon"
 import TickIcon from "../assets/icons/TickIcon"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import CustomizeModal from "./CustomizeModal"
 
 export default function ProductDetails({ product }) {
     const medias = product.media.edges;
@@ -14,14 +15,20 @@ export default function ProductDetails({ product }) {
 
     const [activeImage, setActiveImage] = useState(product.featuredImage.url);
     const [activePosition, setActivePosition] = useState(0);
-    const [selectedVariant, setSelectedVariant] = useState(variants[1].node.id);
+    const [selectedVariant, setSelectedVariant] = useState(variants[1]?.node.id);
+    const [showCustomize, setShowCustomize] = useState(false);
+
+    useEffect(() => {
+        if (showCustomize) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = 'auto';
+    }, showCustomize)
 
     // TODO: improve
     const currencyCodes = []
     currencyCodes['GBP'] = '£'
 
     const changeActiveImage = (media, i) => {
-        media && setActiveImage(media.node.image.url);
+        media?.node && setActiveImage(media.node.image.url);
         if (i >= 0 && i <= medias.length - 1) setActivePosition(i);
     }
 
@@ -39,8 +46,19 @@ export default function ProductDetails({ product }) {
         changeActiveImage(medias[newPosition]);
     }
 
+    const clickCustomize = () => {
+        document.body.style.overflow = 'hidden';
+        setShowCustomize(true);
+    }
+
+    const hideModal = () => {
+        document.body.style.overflow = 'unset';
+        setShowCustomize(false);
+    }
+
     return (
         <>
+            <CustomizeModal product={product} show={showCustomize} close={hideModal} />
             <div className="breadcrumb">Home  ›  TODO  ›  TODO</div>
             <div className="product-container">
                 <div className="product-info">
@@ -75,18 +93,16 @@ export default function ProductDetails({ product }) {
                                 :
                                 `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount} - ${currencyCodes[priceRange.maxVariantPrice.currencyCode]}${priceRange.maxVariantPrice.amount}`
                             }
-
                         </span>
                         <p>Availability: TODO</p>
                     </div>
                     <div className="variants">
-
                         {variants.map((v, i) => {
-                            if (v.node.title != 'DefaultVariant') return (
-                                <div className={`variant-item ${selectedVariant == v.node.id && 'selected'}`}>
+                            if (v.node?.title != 'DefaultVariant') return (
+                                <div className={`variant-item ${selectedVariant == v.node?.id && 'selected'}`}>
                                     <div>
                                         <span>In Stock Option {i}</span>
-                                        <p>{currencyCodes[v.node.priceV2.currencyCode]}{v.node.priceV2.amount}</p>
+                                        <p>{currencyCodes[v.node?.priceV2.currencyCode]}{v.node?.priceV2.amount}</p>
                                     </div>
                                     <span className="exclamation-circle">
                                         <ExclamationIcon />
@@ -107,7 +123,7 @@ export default function ProductDetails({ product }) {
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <span className="customize-button">
+                    <span className="customize-button" onClick={clickCustomize}>
                         <span><SettingsIcon /></span>
                         Customize Your Product
                     </span>

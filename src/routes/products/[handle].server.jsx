@@ -1,9 +1,9 @@
 import { useShop, useShopQuery, Seo, useRouteParams } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-import { useEffect, useState } from 'react'
 import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
 import Layout from '../../components/Layout.server';
+import CustomizeModal from '../../rs-components/CustomizeModal';
 
 export default function Product({ country = { isoCode: 'US' } }) {
   const { handle } = useRouteParams();
@@ -53,10 +53,12 @@ export default function Product({ country = { isoCode: 'US' } }) {
   }
 
   return (
-    <Layout>
-      <Seo type="product" data={product} />
-      <ProductDetails product={product} />
-    </Layout>
+    <>
+      <Layout>
+        <Seo type="product" data={product} />
+        <ProductDetails product={product} />
+      </Layout>
+    </>
   );
 }
 
