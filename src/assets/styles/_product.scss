@@ -1,7 +1,4 @@
-$grey-letters: #416267;
-$black-icon  : #233638;
-$green       : #61B22C;
-$white       : #F8F8F8;
+@use 'global';
 
 @keyframes modal-in {
     0% {
@@ -18,7 +15,7 @@ $white       : #F8F8F8;
     margin-top    : 0px;
     font-size     : 12px;
     letter-spacing: 1px;
-    color         : $grey-letters;
+    color         : global.$grey-letters;
     font-weight   : 200;
     font-family   : 'Plus Jakarta Sans', sans-serif;
 }
@@ -27,7 +24,6 @@ $white       : #F8F8F8;
 
     visibility: hidden;
     display   : flex;
-
     position        : fixed;
     z-index         : 255;
     left            : 0;
@@ -80,7 +76,7 @@ $white       : #F8F8F8;
                     letter-spacing: 1px;
 
                     span {
-                        color: $green;
+                        color: global.$green;
                     }
                 }
 
@@ -92,7 +88,7 @@ $white       : #F8F8F8;
             }
 
             .container-option {
-                border         : 1px solid $white;
+                border         : 1px solid global.$white;
                 padding        : 15px;
                 display        : flex;
                 justify-content: space-between;
@@ -158,7 +154,7 @@ $white       : #F8F8F8;
                             opacity      : 0.6;
 
                             &.selected {
-                                border : 1.5px solid $grey-letters;
+                                border : 1.5px solid global.$grey-letters;
                                 opacity: 1;
                             }
 
@@ -219,7 +215,7 @@ $white       : #F8F8F8;
                 }
 
                 &.grey {
-                    background-color: $white;
+                    background-color: global.$white;
                 }
 
                 &.open {
@@ -230,7 +226,7 @@ $white       : #F8F8F8;
                     flex-direction: column;
 
                     .arrow {
-                        background-color: $white;
+                        background-color: global.$white;
                         transform       : rotate(180deg);
                     }
                 }
@@ -287,7 +283,7 @@ $white       : #F8F8F8;
             position        : relative;
             width           : 100%;
             height          : 475px;
-            background-color: $white;
+            background-color: global.$white;
             border-radius   : 2px;
 
             .full-size {
@@ -360,7 +356,7 @@ $white       : #F8F8F8;
             display    : flex;
             margin-top : 5%;
             font-size  : 12px;
-            color      : $grey-letters;
+            color      : global.$grey-letters;
             align-items: center;
             font-weight: 100;
 
@@ -368,7 +364,7 @@ $white       : #F8F8F8;
                 margin-left     : 7px;
                 height          : 23px;
                 width           : 23px;
-                background-color: $black-icon;
+                background-color: global.$black-icon;
                 border-radius   : 50%;
                 display         : flex;
                 align-items     : center;
@@ -382,7 +378,7 @@ $white       : #F8F8F8;
             margin-right  : 7%;
             margin-top    : 4%;
             flex-direction: column;
-            color         : $grey-letters;
+            color         : global.$grey-letters;
             letter-spacing: 2px;
 
             h2 {
@@ -442,7 +438,7 @@ $white       : #F8F8F8;
                 opacity      : 0.6;
 
                 &.selected {
-                    border : 1.5px solid $grey-letters;
+                    border : 1.5px solid global.$grey-letters;
                     opacity: 1;
 
                     .exclamation-circle {
@@ -498,7 +494,7 @@ $white       : #F8F8F8;
                 line-height        : 26px;
                 font-weight        : 300;
                 line-height        : 28px;
-                color              : $grey-letters;
+                color              : global.$grey-letters;
                 display            : block;
                 position           : relative;
                 padding-left       : 35px;
@@ -555,7 +551,7 @@ $white       : #F8F8F8;
                 top              : 2px;
                 width            : 9px;
                 height           : 15px;
-                border           : solid $grey-letters;
+                border           : solid global.$grey-letters;
                 border-width     : 0 3px 3px 0;
                 border-radius    : 30px 5px 5px 5px;
                 -webkit-transform: rotate(45deg);
@@ -570,8 +566,8 @@ $white       : #F8F8F8;
             display        : flex;
             padding        : 16px;
             width          : 100%;
-            border         : 2px solid $green;
-            color          : $green;
+            border         : 2px solid global.$green;
+            color          : global.$green;
             font-weight    : 800;
             font-size      : 14px;
             letter-spacing : 1.5px;
@@ -597,7 +593,7 @@ $white       : #F8F8F8;
             font-size       : 14px;
             letter-spacing  : 1.5px;
             width           : 100%;
-            background-color: $black-icon;
+            background-color: global.$black-icon;
             color           : #FFFFFF;
         }
 
@@ -620,7 +616,7 @@ $white       : #F8F8F8;
                 margin-right    : 7px;
                 height          : 13px;
                 width           : 13px;
-                background-color: $black-icon;
+                background-color: global.$black-icon;
                 border-radius   : 50%;
                 display         : flex;
                 align-items     : center;

@@ -49,7 +49,7 @@ export default function Layout({children, hero}) {
         </Suspense>
         <main role="main" id="mainContent" className="relative">
           {hero}
-          <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8">
+          <div className="">
             <Suspense fallback={null}>{children}</Suspense>
           </div>
         </main>
