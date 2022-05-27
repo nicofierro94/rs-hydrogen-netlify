@@ -59,80 +59,85 @@ export default function ProductDetails({ product }) {
     return (
         <>
             <CustomizeModal product={product} show={showCustomize} close={hideModal} />
-            <div className="breadcrumb">Home  ›  TODO  ›  TODO</div>
-            <div className="product-container">
-                <div className="product-info">
-                    <div className="carrousel">
-                        <img src={activeImage} width="100%" height="100%" />
-                        <span className="full-size cross circle"><FullSizeIcon /></span>
-                        <span className="arrow-left circle" onClick={backActiveImage}><ArrowLeftIcon /></span>
-                        <span className="arrow-right circle" onClick={nextActiveImage}><ArrowRightIcon /></span>
-                    </div>
-                    <div className="images-list">
-                        {Array.from(Array(5)).map((_, i) =>
-                            <div key={i} className="images-item" onClick={() => changeActiveImage(medias[i], i)}>
-                                {medias[i] && <img src={medias[i].node.image.url} width="100%" height="100%" />}
+            <div className="breadcrumb px-5">Home  ›  TODO  ›  TODO</div>
+            <div className="product-container container px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2">
+                    <div className="product-info">
+                            <div className="carrousel">
+                                <img src={activeImage} width="100%" height="100%" />
+                                <span className="full-size cross circle"><FullSizeIcon /></span>
+                                <span className="arrow-left circle" onClick={backActiveImage}><ArrowLeftIcon /></span>
+                                <span className="arrow-right circle" onClick={nextActiveImage}><ArrowRightIcon /></span>
                             </div>
-                        )}
-                    </div>
-                    <span className="share-button">Share <span><ShareIcon /></span></span>
-                    <div className="overview">
-                        <h2>Overview</h2>
-                        {/* <p dangerouslySetInnerHTML={{__html: product.descriptionHtml}}></p> */}
-                        <p>{product.description}</p>
-                    </div>
-                </div>
-                <div className="product-options">
-                    <h2>{product.title}</h2>
-                    <div className="breadcrumb">› TODO</div>
-                    <div className="breadcrumb">› TODO</div>
-                    <div className="price">
-                        <span>
-                            {priceRange.minVariantPrice.amount == priceRange.maxVariantPrice.amount ?
-                                `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount}`
-                                :
-                                `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount} - ${currencyCodes[priceRange.maxVariantPrice.currencyCode]}${priceRange.maxVariantPrice.amount}`
-                            }
-                        </span>
-                        <p>Availability: TODO</p>
-                    </div>
-                    <div className="variants">
-                        {variants.map((v, i) => {
-                            if (v.node?.title != 'DefaultVariant') return (
-                                <div className={`variant-item ${selectedVariant == v.node?.id && 'selected'}`}>
-                                    <div>
-                                        <span>In Stock Option {i}</span>
-                                        <p>{currencyCodes[v.node?.priceV2.currencyCode]}{v.node?.priceV2.amount}</p>
+                            <div className="images-list">
+                                {Array.from(Array(5)).map((_, i) =>
+                                    <div key={i} className="images-item" onClick={() => changeActiveImage(medias[i], i)}>
+                                        {medias[i] && <img src={medias[i].node.image.url} width="100%" height="100%" />}
                                     </div>
-                                    <span className="exclamation-circle">
-                                        <ExclamationIcon />
-                                    </span>
-                                </div>)
-                        })}
-                    </div>
-                    <div className="extra-options">
-                        <p>Extra Options</p>
-                        <label className="container">
-                            TODO
-                            <input type="checkbox" checked onChange={() => { }} />
-                            <span className="checkmark"></span>
-                        </label>
-                        <label className="container">
-                            TODO
-                            <input type="checkbox" onChange={() => { }} />
-                            <span className="checkmark"></span>
-                        </label>
-                    </div>
-                    <span className="customize-button" onClick={clickCustomize}>
-                        <span><SettingsIcon /></span>
-                        Customize Your Product
-                    </span>
-                    <span className="black-button">Add to Basket  - £449.00</span>
-                    <span className="shop-secure">
-                        <span><TickIcon /></span>
-                        Shop secure. Free Returns
-                    </span>
-                </div>
+                                )}
+                            </div>
+                            <span className="share-button">Share <span><ShareIcon /></span></span>                            
+                        </div>
+                        
+
+                        <div className="product-options lg:px-20 md:px-10 sm:px-10">
+                            <h2>{product.title}</h2>
+                            <div className="breadcrumb">› TODO</div>
+                            <div className="breadcrumb">› TODO</div>
+                            <div className="price">
+                                <span>
+                                    {priceRange.minVariantPrice.amount == priceRange.maxVariantPrice.amount ?
+                                        `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount}`
+                                        :
+                                        `${currencyCodes[priceRange.minVariantPrice.currencyCode]}${priceRange.minVariantPrice.amount} - ${currencyCodes[priceRange.maxVariantPrice.currencyCode]}${priceRange.maxVariantPrice.amount}`
+                                    }
+                                </span>
+                                <p>Availability: TODO</p>
+                            </div>
+                            <div className="variants">
+                                {variants.map((v, i) => {
+                                    if (v.node?.title != 'DefaultVariant') return (
+                                        <div className={`variant-item ${selectedVariant == v.node?.id && 'selected'}`}>
+                                            <div>
+                                                <span>In Stock Option {i}</span>
+                                                <p>{currencyCodes[v.node?.priceV2.currencyCode]}{v.node?.priceV2.amount}</p>
+                                            </div>
+                                            <span className="exclamation-circle">
+                                                <ExclamationIcon />
+                                            </span>
+                                        </div>)
+                                })}
+                            </div>
+                            <div className="extra-options">
+                                <p>Extra Options</p>
+                                <label className="container">
+                                    TODO
+                                    <input type="checkbox" checked onChange={() => { }} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="container">
+                                    TODO
+                                    <input type="checkbox" onChange={() => { }} />
+                                    <span className="checkmark"></span>
+                                </label>
+                            </div>
+                            <span className="customize-button" onClick={clickCustomize}>
+                                <span><SettingsIcon /></span>
+                                Customize Your Product
+                            </span>
+                            <span className="black-button">Add to Basket  - £449.00</span>
+                            <span className="shop-secure">
+                                <span><TickIcon /></span>
+                                Shop secure. Free Returns
+                            </span>
+                        </div>
+                        <div className="overview lg:px-9 sm:px-0 my-10">
+                                <h2>Overview</h2>
+                                {/* <p dangerouslySetInnerHTML={{__html: product.descriptionHtml}}></p> */}
+                                <p>{product.description}</p>
+                        </div>
+                </div> 
+                
             </div>
         </>
     )
