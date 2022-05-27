@@ -24,7 +24,17 @@ export default function HomeTest() {
                 </div>   
                              
             </div>
+<div className="container">
+            <div className="grid grid-cols-1 sm:grid-cols-2">
+                    <div>
+                    lg:w-1/2 sm:1/4
+                    </div>
+                    <div>
+                    lg:w-1/2 sm:1/4
+                    </div>
 
+                </div>
+                </div>
             
         </Layout>
     )

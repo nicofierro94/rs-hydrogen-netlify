@@ -11,13 +11,13 @@
 }
 
 .breadcrumb {
-    margin-bottom : 2%;
-    margin-top    : 0px;
-    font-size     : 12px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 10px;
     letter-spacing: 1px;
-    color         : global.$grey-letters;
-    font-weight   : 200;
-    font-family   : 'Plus Jakarta Sans', sans-serif;
+    color: #416267;
+    font-weight: 200;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .modal {
@@ -275,14 +275,11 @@
     font-family: 'Plus Jakarta Sans', sans-serif !important;
 
     .product-info {
-        width        : 90%;
-        padding-right: 2%;
-        margin-right : 3%;
+             
 
         .carrousel {
             position        : relative;
-            width           : 100%;
-            height          : 475px;
+            width           : 100%;            
             background-color: global.$white;
             border-radius   : 2px;
 
@@ -372,40 +369,38 @@
             }
         }
 
-        .overview {
-            display       : flex;
-            margin-left   : 7%;
-            margin-right  : 7%;
-            margin-top    : 4%;
-            flex-direction: column;
-            color         : global.$grey-letters;
-            letter-spacing: 2px;
+        
+    }
 
-            h2 {
-                font-size    : 25px;
-                line-height  : 16px;
-                font-weight  : 300;
-                margin-bottom: 3%;
-            }
+    .overview {
+        display       : flex;       
+        flex-direction: column;
+        color         : global.$grey-letters;
+        letter-spacing: 2px;
 
-            h3 {
-                font-size    : 25px;
-                line-height  : 16px;
-                font-weight  : 300;
-                margin-bottom: 3%;
-            }
+        h2 {
+            font-size    : 25px;
+            line-height  : 16px;
+            font-weight  : 300;
+            margin-bottom: 3%;
+        }
 
-            p {
-                font-size  : 15px;
-                line-height: 28px;
-                font-weight: 100;
-            }
+        h3 {
+            font-size    : 25px;
+            line-height  : 16px;
+            font-weight  : 300;
+            margin-bottom: 3%;
+        }
+
+        p {
+            font-size  : 15px;
+            line-height: 28px;
+            font-weight: 100;
         }
     }
 
-    .product-options {
-        width       : 50%;
-        padding-left: 2%;
+    .product-options {       
+        
 
         h2 {
             margin-bottom : 2%;
@@ -625,3 +620,5 @@
         }
     }
 }
+
+

@@ -1,5 +1,12 @@
 //////----Global Styles----//////
 
+//Container
+.product-container, .breadcrumb {
+    max-width: 1390px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 //Colors
 $grey-letters: #416267;
