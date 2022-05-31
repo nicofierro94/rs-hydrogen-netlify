@@ -44,16 +44,17 @@
         font-family     : 'Plus Jakarta Sans', sans-serif !important;
         position        : fixed;
         right           : 0;
-        width           : 40%;
+        width           : 48%;
         height          : 100vh;
         background-color: #FFFFFF;
         margin-right    : -50%;
         transition      : all 1s;
 
         .content {
-            padding-top  : 5%;
-            padding-left : 6%;
-            padding-right: 6%;
+            padding-top: 5%;
+            padding-left: 5%;
+            padding-right: 5%;
+            max-width: 535px;
 
             .back {
                 cursor: pointer;
@@ -370,7 +371,9 @@
         }
 
         
+        
     }
+    
 
     .overview {
         display       : flex;       
@@ -411,7 +414,8 @@
         }
 
         .breadcrumb {
-            margin-bottom: 0;
+            font-size: 10px;
+            margin: 4px 0px;
         }
 
         .variants {
@@ -427,13 +431,13 @@
                 position     : relative;
                 width        : 49%;
                 border       : 1px solid #416267;
-                padding      : 13px;
+                padding      : 10px 15px;
                 margin-bottom: 2%;
                 align-items  : center;
                 opacity      : 0.6;
 
                 &.selected {
-                    border : 1.5px solid global.$grey-letters;
+                    border : 2px solid #416267bf;
                     opacity: 1;
 
                     .exclamation-circle {
@@ -621,4 +625,33 @@
     }
 }
 
+//---------------RESPONSIVE-----------------//
 
+
+@media (max-width: global.$breakpoint-tablet) {
+    .product-options h2 {
+        margin-top: 10px;
+    }
+   .product-info .share-button {        
+        margin-top: 0;        
+        justify-content: flex-end;
+    }
+    .product-container .product-info .images-list .images-item {        
+        min-height: auto;        
+    }
+    .product-container .product-options .variants .variant-item {        
+        padding: 9px 10px;       
+    }
+    .overview {
+        margin-top: 80px;        
+    }
+    .modal .customize-modal {        
+        margin-right: -100%;
+        width: 100%        
+    }
+    .breadcrumb {
+        visibility: hidden;
+        margin: 0;
+    }
+  
+}

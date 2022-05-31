@@ -80,7 +80,7 @@ export default function ProductDetails({ product }) {
                         </div>
                         
 
-                        <div className="product-options lg:px-20 md:px-10 sm:px-10">
+                        <div className="product-options lg:pl-20 lg:pr-36 md:px-10 sm:px-10">
                             <h2>{product.title}</h2>
                             <div className="breadcrumb">› TODO</div>
                             <div className="breadcrumb">› TODO</div>
