@@ -18,7 +18,7 @@ export default function CustomizeModal({ product, show, close }) {
                         <span><span>Customize: </span>£449.00 - £560.00</span>
                         <p>Availability: TODO</p>
                     </div>
-                    <p>Select:</p>
+                    <p className="select-title">Select:</p>
                     <Option option={{ type: 'text', title: "Size" }} hasValue={true} />
                     <Option option={{ type: 'image', title: 'Base Color' }} hasValue={false} />
 
@@ -95,30 +95,32 @@ const ImageOptions = () => {
                     <span><b>£540.00</b>   <del>£661.00</del></span>
                 </div>
                 <div className="box-container">
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
+                    <div className="grid-options-colors">
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                    </div>
                 </div>
 
                 <div className="head">
@@ -126,30 +128,32 @@ const ImageOptions = () => {
                     <span><b>£540.00</b>   <del>£661.00</del></span>
                 </div>
                 <div className="box-container">
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
-                    <span className="box-image"></span>
+                    <div className="grid-options-colors">
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                        <span className="box-image"></span>
+                    </div>
                 </div>
             </div>
         </div>
