@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
 import Layout from '../../components/Layout.server';
-import CustomizeModal from '../../rs-components/CustomizeModal';
 
 export default function Product({ country = { isoCode: 'US' } }) {
   const { handle } = useRouteParams();
@@ -28,28 +27,6 @@ export default function Product({ country = { isoCode: 'US' } }) {
     const breadcrumb = product.metafields.edges.filter(m => m.node.namespace == "breadcrumb");
     const brandId = breadcrumb.filter(b => b.node.key == "brandId");
     const productRangeId = breadcrumb.filter(b => b.node.key == "productRangeId");
-
-    console.log(product.variants.edges[0].node)
-
-    // const {
-    //   data: { brand },
-    // } = useShopQuery({
-    //   query: QUERY_BRAND,
-    //   variables: {
-    //     brandId,
-    //   },
-    //   preload: true,
-    // })
-
-    // const {
-    //   data: { pr },
-    // } = useShopQuery({
-    //   query: QUERY_PR,
-    //   variables: {
-    //     productRangeId,
-    //   },
-    //   preload: true,
-    // })
   }
 
   return (
@@ -61,14 +38,6 @@ export default function Product({ country = { isoCode: 'US' } }) {
     </>
   );
 }
-
-// const QUERYBRAND = gql`
-//   query brand(
-//     $brandId: 
-//   )
-// `;
-
-// const QUERYPR = gql``;
 
 const QUERY = gql`
   query product(

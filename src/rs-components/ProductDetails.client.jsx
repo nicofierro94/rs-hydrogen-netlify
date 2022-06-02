@@ -6,7 +6,7 @@ import ExclamationIcon from "../assets/icons/ExclamationIcon"
 import SettingsIcon from "../assets/icons/SettingsIcon"
 import TickIcon from "../assets/icons/TickIcon"
 import { useState, useEffect } from "react"
-import CustomizeModal from "./CustomizeModal"
+import CustomizeModal from "./CustomizeModal.client"
 
 export default function ProductDetails({ product }) {
     const medias = product.media.edges;
