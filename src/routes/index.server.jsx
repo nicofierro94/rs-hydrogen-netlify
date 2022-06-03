@@ -91,7 +91,7 @@ const SEO_QUERY = gql`
 `;
 
 const QUERY = gql`
-query brand {
+query collections {
     collections(first: 250) {
       edges {
         node {
