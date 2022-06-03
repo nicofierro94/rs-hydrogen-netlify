@@ -29,20 +29,7 @@ export default function ProductList({ productRange, brand, search, options }) {
         data: filter
     });
 
-    // const { response, loading, error } = useAxios({
-    //     method: 'post',
-    //     url: '/posts',
-    //     headers: JSON.stringify({ accept: '*/*' }),
-    //     body: JSON.stringify({
-    //         userId: 1,
-    //         id: 19392,
-    //         title: 'title',
-    //         body: 'Sample text',
-    //     }),
-    // });
-
     useEffect(() => {
-        // setProducts(response)
         execute();
     }, [])
 
