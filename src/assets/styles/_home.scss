@@ -1,0 +1,39 @@
+@use 'global';
+
+//////----HERO----//////
+
+.containerHero {
+    min-height: 35rem;        
+    background: url("https://cdn.shopify.com/s/files/1/0638/9193/1378/files/MAXTRIX_ROOM_YOUTH_1950x.jpg?v=1649529423") center center;
+    background-size: cover;  
+    border-bottom: 4px solid global.$orange-kiosk;   
+    filter: brightness(90%);
+
+        &__title {
+            font-size: 4em;
+            text-shadow: 3px 2px 4px #535353;            
+            }   
+
+            
+        &__description {
+            text-shadow: 3px 2px 4px #535353;   
+        }    
+        
+
+}
+
+
+
+//Movil//
+@media (max-width: global.$breakpoint-tablet) {
+
+    .containerHero__title {
+        font-size: 3rem;
+        line-height: 3.5rem;
+        
+    }
+    .containerHero.flex.justify-center.items-center {
+        min-height: 30rem;
+    }
+    
+    }

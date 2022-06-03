@@ -1,0 +1,11 @@
+@use 'global';
+
+.header {
+    min-height: 83px;
+    border-bottom: 2px solid global.$blue !important;
+
+    .logo img {
+        max-width: 195px;
+    }
+
+}

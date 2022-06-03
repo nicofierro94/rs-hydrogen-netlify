@@ -1,8 +1,9 @@
 @use 'global';
 
 .footer {
-    background-color: #4c5579;
-    border-top: 2px solid #FF8C60;
+    background-color: global.$blue-kiosk;
+    border-top: 2px solid;
+    border-color: global.$orange-kiosk;
     min-height: 85px;
     color: global.$white;     
     font-size: 13px;
