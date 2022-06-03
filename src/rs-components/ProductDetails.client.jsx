@@ -1,6 +1,8 @@
 import FullSizeIcon from "../assets/icons/FullSizeIcon"
 import ArrowLeftIcon from "../assets/icons/ArrowLeftIcon"
 import ArrowRightIcon from "../assets/icons/ArrowRightIcon"
+import CustomizeIcon from "../assets/icons/CustomizeIcon"
+import AssembleIcon from "../assets/icons/AssembleIcon"
 import ShareIcon from "../assets/icons/ShareIcon"
 import ExclamationIcon from "../assets/icons/ExclamationIcon"
 import SettingsIcon from "../assets/icons/SettingsIcon"
@@ -131,13 +133,50 @@ export default function ProductDetails({ product }) {
                                 Shop secure. Free Returns
                             </span>
                         </div>
-                        <div className="overview lg:px-9 sm:px-0 my-10">
-                                <h2>Overview</h2>
-                                {/* <p dangerouslySetInnerHTML={{__html: product.descriptionHtml}}></p> */}
-                                <p>{product.description}</p>
-                        </div>
-                </div> 
-                
+                        <div className="overview lg:px-9 sm:px-0 lg:my-5">
+                            <div className="description-container">
+                                <p dangerouslySetInnerHTML={{__html: product.descriptionHtml}}></p>
+                            </div>
+                            <div className="features-container mb-10">
+                                <h3>Features</h3>
+                                <div className="customizable">
+                                    <div className="icon">
+                                        <CustomizeIcon />
+                                    </div>
+                                    <div className="description">
+                                        <p><span>Customizable</span>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. </p>
+                                    </div>                                    
+                                </div> 
+                                <div className="assemble">
+                                    <div className="icon">
+                                        <AssembleIcon />
+                                    </div>
+                                    <div className="description">
+                                        <p><span>Assemble</span>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. </p>
+                                    </div>                                    
+                                </div>                                   
+                            </div>                                     
+                        </div>                      
+                </div>               
+            </div>
+            <div className="pre-footer mb-20">
+                <div className="featured-product grid grid-cols-1 sm:grid-cols-2 my-10">
+                    <div className="image-feature">
+                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/image_7.jpg?v=1654192874" alt="" />
+                    </div>
+                    <div className="text-featured lg:pl-20 lg:pr-36 md:px-10 sm:px-10">
+                        <p>Furniture Of Excellent Quality, That Make Your Home An Even Better Place</p>
+                    </div>
+                </div>
+                <div className="recommended lg:mt-36">
+                    <h3>You May Also Like</h3>
+                    <div class="grid gap-14 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 my-16 px-4">
+                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 01</div>
+                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 02</div>
+                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 03</div>                        
+                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 04</div>                        
+                    </div>
+                </div>
             </div>
         </>
     )
