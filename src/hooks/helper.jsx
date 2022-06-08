@@ -1,1 +1,1 @@
-export const getMetafield = (metafields, namespace, key) => metafields.edges.find(m => m.node.namespace == namespace && m.node.key == key)?.node?.value
+export const getMetafield = (metafields, namespace, key) => metafields.edges.find(m => m.node?.namespace == namespace && m.node?.key == key)?.node?.value
