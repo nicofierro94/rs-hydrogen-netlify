@@ -3,13 +3,14 @@ import useAxios from '../hooks/axios';
 import CustomizeProduct from "../assets/icons/CustomizeProduct"
 import ArrowDownIconDark from "../assets/icons/ArrowDownIconDark"
 import SettingsIcon from "../assets/icons/SettingsIcon"
-
+import FilterModal from "./FilterModal.client"
 
 
 export default function ProductList({ productRange, brand, search, options }) {
 
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
+    const [showFilter, setShowFilter] = useState(false);
     const [filter, setFilter] = useState({
         pagination: {
             page: 1,
@@ -26,6 +27,16 @@ export default function ProductList({ productRange, brand, search, options }) {
         },
         sort: []
     });
+
+    const clickFilter = () => {
+        document.body.style.overflow = 'hidden';
+        setShowFilter(true);
+    }
+
+    const hideModal = () => {
+        document.body.style.overflow = 'unset';
+        setShowFilter(false);
+    }
 
     const { response, loading, error, execute } = useAxios({
         url: 'https://nazzq9i1k7.execute-api.us-east-1.amazonaws.com/rs-filter-api/product',
@@ -46,6 +57,8 @@ export default function ProductList({ productRange, brand, search, options }) {
     if (loading) return <h2>LOADING...</h2>
     else return (
         <>
+            <FilterModal show={showFilter} close={hideModal} />
+
             <div className="SectionProductTop">
                 <div className="SectionProductTop__container">
                     <div className="SectionProductTop__breadcrumb">
@@ -68,7 +81,7 @@ export default function ProductList({ productRange, brand, search, options }) {
                     <div className="ProductList__filters grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="ProductList__left-section">
                             <div className='ProductList__filter--button'>
-                                <button type="button">Filters <span><CustomizeProduct /></span></button>
+                                <button type="button" onClick={clickFilter}>Filters <span><CustomizeProduct /></span></button>
                             </div>
                             <div className='ProductList__featured--dropdown'>
                                 <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-left inline-flex items-center" type="button">Featured <span><ArrowDownIconDark /></span></button>
