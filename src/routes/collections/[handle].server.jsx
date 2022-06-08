@@ -5,6 +5,7 @@ import LoadMoreProducts from '../../components/LoadMoreProducts.client';
 import Layout from '../../rs-components/Layout.server';
 import ProductCard from '../../components/ProductCard';
 import NotFound from '../../components/NotFound.server';
+import { getMetafield } from '../../hooks/helper';
 
 export default function Collection({
   country = { isoCode: 'US' },
@@ -23,6 +24,14 @@ export default function Collection({
     },
     preload: true,
   });
+
+  const response = useShopQuery({
+    query: QUERY_CATEGORIES,
+    preload: true,
+  });
+
+  const categories = response.data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'category');
+
 
   // if (data?.collection == null) {
   //   return <NotFound />;
@@ -65,7 +74,7 @@ export default function Collection({
   }
 
   return (
-    <Layout>
+    <Layout categories={categories}>
       {/* the seo object will be expose in API version 2022-04 or later */}
       {/* <Seo type="collection" data={collection} /> */}
       <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
@@ -88,7 +97,7 @@ export default function Collection({
         </ul>
       }
       {colType == 'product-range' &&
-        <ProductList options={options} productRange={colType == 'product-range' && handle} brand={colType == 'brand' && handle} />
+        <ProductList options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} />
       }
     </Layout>
   );
@@ -132,3 +141,33 @@ const QUERY = gql`
       }
     }
   }`;
+
+const QUERY_CATEGORIES = gql`
+query collections {
+    collections(first: 250) {
+      edges {
+        node {
+          title
+          id
+          handle
+          image {
+            id
+            url
+            altText
+            width
+            height
+          }
+          metafields(first: 100){
+              edges {
+                  node{ 
+                      value
+                      key
+                      namespace
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
+`;

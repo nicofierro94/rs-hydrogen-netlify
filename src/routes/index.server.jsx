@@ -1,16 +1,22 @@
 import Layout from "../rs-components/Layout.server";
 import gql from 'graphql-tag';
 import { Link, useShopQuery, Image, CacheDays, Seo } from "@shopify/hydrogen";
+import { getMetafield } from "../hooks/helper";
 
 export default function Index() {
     const { data } = useShopQuery({
         query: QUERY,
         preload: true,
     });
-    const brands = data.collections.edges.filter(c => c.node.metafield.value == 'brand');
-    const productRanges = data.collections.edges.filter(c => c.node.metafield.value == 'product-range');
+
+    
+
+    const brands = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'brand');
+    const productRanges = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'product-range');
+    const categories = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'category');
+
     return (
-        <Layout>
+        <Layout categories={categories}>
             <SeoForHomepage />
             <div className="containerHero flex justify-center items-center">
                 <div className="containerHero__textArea">
@@ -21,9 +27,9 @@ export default function Index() {
 
             <div className="containerCollection Brands">
                 <div className="container-line mt-28 mb-12">
-                     <h2 className="containerCollection__title text-center text-2xl">BRANDS</h2>
+                    <h2 className="containerCollection__title text-center text-2xl">BRANDS</h2>
                 </div>
-                <div className="containerCollection__grid grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 px-4 mb-28">                    
+                <div className="containerCollection__grid grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 px-4 mb-28">
                     {brands.map(c => <Collection collection={c} />)}
                 </div>
             </div>
@@ -35,7 +41,7 @@ export default function Index() {
                 <div className="containerCollection__grid grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 px-4 mb-28">
                     {productRanges.map(c => <Collection collection={c} />)}
                 </div>
-            </div>           
+            </div>
         </Layout>
     )
 }
@@ -105,8 +111,14 @@ query collections {
             width
             height
           }
-          metafield(namespace: "attributes", key: "collectionType") {
-            value
+          metafields(first: 100){
+              edges {
+                  node{ 
+                      value
+                      key
+                      namespace
+                  }
+              }
           }
         }
       }

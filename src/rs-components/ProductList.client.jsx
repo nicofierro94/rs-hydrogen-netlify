@@ -40,7 +40,7 @@ export default function ProductList({ productRange, brand, search, options }) {
 
     useEffect(() => {
         setProducts(response?.result.result);
-        setTotal(response?.result.result);
+        setTotal(response?.total);
     }, [response])
 
     if (loading) return <h2>LOADING...</h2>
@@ -276,7 +276,19 @@ export default function ProductList({ productRange, brand, search, options }) {
             <h2>Brand: {brand}</h2>
             <h2>Search: {search}</h2>
 
-            <b>Products</b>
+            <br />
+
+            {response.options_filters.options.map(o =>
+                <div>
+                    <b>{o.label}</b>
+                    {o.options.map(oo => <li>{oo.key} ({oo.doc_count})</li>)}
+                </div>
+            )}
+
+            <br />
+
+            <b>Products : Total({total})</b>
+
             <ul>
                 {products?.map(p =>
                     <li>{p._source.title}</li>)}

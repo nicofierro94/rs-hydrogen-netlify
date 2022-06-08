@@ -2,7 +2,7 @@ import { LocalizationProvider } from '@shopify/hydrogen';
 import Header from './Header.client';
 import Footer from './Footer.server';
 
-export default function Layout({ children }) {
+export default function Layout({ children, categories }) {
     return (
         <LocalizationProvider preload="*">
             <div className="absolute top-0 left-0">
@@ -14,7 +14,7 @@ export default function Layout({ children }) {
                 </a>
             </div>
             <div className="min-h-screen max-w-screen text-gray-700 font-sans">
-                <Header />
+                <Header categories={categories} />
                 <main role="main" id="mainContent" className="relative">
                     <div className="">
                         {children}
