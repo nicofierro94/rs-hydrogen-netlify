@@ -14,18 +14,14 @@
     overflow        : auto;
     background-color: rgba(0, 0, 0, 0);
     overflow-y      : hidden;
-
     transition: all 1s;
-
-    div:first-child {
-        width: 100%;
-    }
+    
 
     .customize-modal {
         font-family     : 'Plus Jakarta Sans', sans-serif !important;
         position        : fixed;
         right           : 0;
-        width           : 48%;
+        width           : 31%;
         height          : 100vh;
         background-color: #FFFFFF;
         margin-right    : -50%;
@@ -296,6 +292,30 @@
     &__product-item *[data-tooltip]:hover::after {
         opacity: 1;
     }
+
+}
+
+.filterSection {
+
+            &__container {
+                max-width: 300px;
+                padding-top: 5%;
+                padding-left: 5%;
+            }
+
+            &__top-area {
+                display: flex;
+                justify-content: space-between;
+            }
+
+
+
+            &__custimizable {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
 
 }
 
