@@ -170,11 +170,11 @@ export default function ProductDetails({ product }) {
                 </div>
                 <div className="recommended lg:mt-36">
                     <h3>You May Also Like</h3>
-                    <div class="grid gap-14 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 my-16 px-4">
-                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 01</div>
-                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 02</div>
-                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 03</div>                        
-                        <div class="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 04</div>                        
+                    <div className="grid gap-14 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 my-16 px-4">
+                        <div className="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 01</div>
+                        <div className="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 02</div>
+                        <div className="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 03</div>                        
+                        <div className="p-4 rounded-lg bg-indigo-300 dark:bg-indigo-800 dark:text-indigo-400">Product 04</div>                        
                     </div>
                 </div>
             </div>

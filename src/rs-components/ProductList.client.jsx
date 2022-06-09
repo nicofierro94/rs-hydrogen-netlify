@@ -4,6 +4,7 @@ import CustomizeProduct from "../assets/icons/CustomizeProduct"
 import ArrowDownIconDark from "../assets/icons/ArrowDownIconDark"
 import SettingsIcon from "../assets/icons/SettingsIcon"
 import FilterModal from "./FilterModal.client"
+import { Link } from '@shopify/hydrogen';
 
 
 export default function ProductList({ productRange, brand, search, options }) {
@@ -11,6 +12,8 @@ export default function ProductList({ productRange, brand, search, options }) {
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
     const [showFilter, setShowFilter] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [dropValue, setDropValue] = useState('option 1')
     const [filter, setFilter] = useState({
         pagination: {
             page: 1,
@@ -27,6 +30,8 @@ export default function ProductList({ productRange, brand, search, options }) {
         },
         sort: []
     });
+
+    const dropDownValues = () => ['option 1', 'option 2', 'option 3', 'option 4']
 
     const clickFilter = () => {
         document.body.style.overflow = 'hidden';
@@ -54,6 +59,11 @@ export default function ProductList({ productRange, brand, search, options }) {
         setTotal(response?.total);
     }, [response])
 
+    const onSelect = (value) => {
+        setDropValue(value);
+        setShowDropdown(false);
+    }
+
     if (loading) return <h2>LOADING...</h2>
     else return (
         <>
@@ -62,14 +72,14 @@ export default function ProductList({ productRange, brand, search, options }) {
             <div className="SectionProductTop">
                 <div className="SectionProductTop__container">
                     <div className="SectionProductTop__breadcrumb">
-                        <a href="/" title="Home">Home</a><span aria-hidden="true">›</span><span>Dining Tables</span>
+                        <a href="/" title="Home">Home</a><span aria-hidden="true">›</span><span>TODO</span>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="SectionProductTop__category-name">
-                            <h1>Category name</h1>
+                            <h1>Category name (TODO)</h1>
                         </div>
                         <div className="SectionProductTop__result">
-                            <p><span>All Sofas  1-28</span>  of  236  Results</p>
+                            <p><span>All Sofas  1-28 (TODO)</span>  of  {total}  Results</p>
                         </div>
                     </div>
                 </div>
@@ -84,21 +94,14 @@ export default function ProductList({ productRange, brand, search, options }) {
                                 <button type="button" onClick={clickFilter}>Filters <span><CustomizeProduct /></span></button>
                             </div>
                             <div className='ProductList__featured--dropdown'>
-                                <button id="dropdownDefault" data-dropdown-toggle="dropdown" class="text-left inline-flex items-center" type="button">Featured <span><ArrowDownIconDark /></span></button>
-                                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                                        </li>
+                                <button id="dropdownDefault" data-dropdown-toggle="dropdown" className="text-left inline-flex items-center" type="button" onClick={() => setShowDropdown(!showDropdown)}>{dropValue} <span><ArrowDownIconDark /></span></button>
+                                <div id="dropdown" className={`z-10 ${!showDropdown && 'hidden'} bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700`}>
+                                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+                                        {dropDownValues().map((v, i) =>
+                                            <li key={i}>
+                                                <a key={i} href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={() => onSelect(v)}>{v}</a>
+                                            </li>
+                                        )}
                                     </ul>
                                 </div>
                             </div>
@@ -106,11 +109,11 @@ export default function ProductList({ productRange, brand, search, options }) {
 
                         <div className="ProductList__right-section">
                             <div className="ProductList__customizable-button">
-                                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                    <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white appearance-none cursor-pointer" />
-                                    <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                    <input type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white appearance-none cursor-pointer" />
+                                    <label htmlFor="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                                 </div>
-                                <label for="toggle">Customizable</label>
+                                <label htmlFor="toggle">Customizable</label>
                             </div>
                             <div className="ProductList__clear-button">
                                 <button type="button">Clear All </button>
@@ -121,161 +124,11 @@ export default function ProductList({ productRange, brand, search, options }) {
 
                     <div className="ProductList__grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-2">
 
-                        <div className="ProductList__product-item">
-                            <div className="ProductList__product-container">
-                                <div className="ProductList__product-topSection">
-                                    <div className="ProductList__product-image">
-                                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/img3.png" alt="" />
-                                    </div>
-                                </div>
-                                <div className="ProductList__product-bottomSection">
-                                    <div className="ProductList__product-description">
-                                        <div className="ProductList__product-brand">
-                                            <p><span>› </span>KARTELL®</p>
-                                        </div>
-                                        <div className="ProductList__product-range">
-                                            <p><span>› </span>Canyon - Bedroom</p>
-                                        </div>
-                                        <div className="ProductList__product-title">
-                                            <p>150 Standard Power Recliner Chair (Single Motor)</p>
-                                        </div>
-                                    </div>
-                                    <div className="ProductList__price-section">
-                                        <div className="ProductList__price">
-                                            <p>£ 104 <span>- £ 572</span></p>
-                                        </div>
-                                        <div className="ProductList__customise" data-tooltip="Customise">
-                                            <span><SettingsIcon /></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="ProductList__product-item">
-                            <div className="ProductList__product-container">
-                                <div className="ProductList__product-topSection">
-                                    <div className="ProductList__product-image">
-                                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/img3.png" alt="" />
-                                    </div>
-                                </div>
-                                <div className="ProductList__product-bottomSection">
-                                    <div className="ProductList__product-description">
-                                        <div className="ProductList__product-brand">
-                                            <p><span>› </span>KARTELL®</p>
-                                        </div>
-                                        <div className="ProductList__product-range">
-                                            <p><span>› </span>Canyon - Bedroom</p>
-                                        </div>
-                                        <div className="ProductList__product-title">
-                                            <p>150 Standard Power Recliner Chair (Single Motor)</p>
-                                        </div>
-                                    </div>
-                                    <div className="ProductList__price-section">
-                                        <div className="ProductList__price">
-                                            <p>£ 104 <span>- £ 572</span></p>
-                                        </div>
-                                        <div className="ProductList__customise" data-tooltip="Customise">
-                                            <span><SettingsIcon /></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="ProductList__product-item">
-                            <div className="ProductList__product-container">
-                                <div className="ProductList__product-topSection">
-                                    <div className="ProductList__product-image">
-                                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/img3.png" alt="" />
-                                    </div>
-                                </div>
-                                <div className="ProductList__product-bottomSection">
-                                    <div className="ProductList__product-description">
-                                        <div className="ProductList__product-brand">
-                                            <p><span>› </span>KARTELL®</p>
-                                        </div>
-                                        <div className="ProductList__product-range">
-                                            <p><span>› </span>Canyon - Bedroom</p>
-                                        </div>
-                                        <div className="ProductList__product-title">
-                                            <p>150 Standard Power Recliner Chair (Single Motor)</p>
-                                        </div>
-                                    </div>
-                                    <div className="ProductList__price-section">
-                                        <div className="ProductList__price">
-                                            <p>£ 104 <span>- £ 572</span></p>
-                                        </div>
-                                        <div className="ProductList__customise" data-tooltip="Customise">
-                                            <span><SettingsIcon /></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="ProductList__product-item">
-                            <div className="ProductList__product-container">
-                                <div className="ProductList__product-topSection">
-                                    <div className="ProductList__product-image">
-                                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/img3.png" alt="" />
-                                    </div>
-                                </div>
-                                <div className="ProductList__product-bottomSection">
-                                    <div className="ProductList__product-description">
-                                        <div className="ProductList__product-brand">
-                                            <p><span>› </span>KARTELL®</p>
-                                        </div>
-                                        <div className="ProductList__product-range">
-                                            <p><span>› </span>Canyon - Bedroom</p>
-                                        </div>
-                                        <div className="ProductList__product-title">
-                                            <p>150 Standard Power Recliner Chair (Single Motor)</p>
-                                        </div>
-                                    </div>
-                                    <div className="ProductList__price-section">
-                                        <div className="ProductList__price">
-                                            <p>£ 104 <span>- £ 572</span></p>
-                                        </div>
-                                        <div className="ProductList__customise" data-tooltip="Customise">
-                                            <span><SettingsIcon /></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="ProductList__product-item">
-                            <div className="ProductList__product-container">
-                                <div className="ProductList__product-topSection">
-                                    <div className="ProductList__product-image">
-                                        <img src="https://cdn.shopify.com/s/files/1/0600/3595/6902/files/img3.png" alt="" />
-                                    </div>
-                                </div>
-                                <div className="ProductList__product-bottomSection">
-                                    <div className="ProductList__product-description">
-                                        <div className="ProductList__product-brand">
-                                            <p><span>› </span>KARTELL®</p>
-                                        </div>
-                                        <div className="ProductList__product-range">
-                                            <p><span>› </span>Canyon - Bedroom</p>
-                                        </div>
-                                        <div className="ProductList__product-title">
-                                            <p>150 Standard Power Recliner Chair (Single Motor)</p>
-                                        </div>
-                                    </div>
-                                    <div className="ProductList__price-section">
-                                        <div className="ProductList__price">
-                                            <p>£ 104 <span>- £ 572</span></p>
-                                        </div>
-                                        <div className="ProductList__customise" data-tooltip="Customise">
-                                            <span><SettingsIcon /></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        {products?.map((p, i) =>
+                            <a key={i} href={`/products/${p._source.handle}`}>
+                                <ProductItem key={i} product={p._source} />
+                            </a>
+                        )}
 
                     </div>
                 </div>
@@ -305,5 +158,45 @@ export default function ProductList({ productRange, brand, search, options }) {
                     <li>{p._source.title}</li>)}
             </ul> */}
         </>
+    )
+}
+
+
+const ProductItem = ({ product }) => {
+    return (
+        <div className="ProductList__product-item">
+            <div className="ProductList__product-container">
+                <div className="ProductList__product-topSection">
+                    <div className="ProductList__product-image">
+                        <img src={product.images[0]} alt="" />
+                    </div>
+                </div>
+                <div className="ProductList__product-bottomSection">
+                    <div className="ProductList__product-description">
+                        <div className="ProductList__product-brand">
+                            <p><span>› </span>{product?.brand.title}</p>
+                        </div>
+                        <div className="ProductList__product-range">
+                            <p><span>› </span>{product?.product_range.title}</p>
+                        </div>
+                        <div className="ProductList__product-title">
+                            <p>{product?.title}</p>
+                        </div>
+                    </div>
+                    <div className="ProductList__price-section">
+                        <div className="ProductList__price">
+                            {product?.fromPrice == product?.toPrice ?
+                                <p>£ {product?.fromPrice}</p>
+                                :
+                                <p>£ {product?.fromPrice} <span>- £ {product?.toPrice}</span></p>
+                            }
+                        </div>
+                        <div className="ProductList__customise" data-tooltip="Customise">
+                            {product?.hasoptions && <span><SettingsIcon /></span>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }

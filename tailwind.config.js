@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}', "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
       typography: (theme) => ({
@@ -22,5 +22,5 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), require('flowbite/plugin')],
 };

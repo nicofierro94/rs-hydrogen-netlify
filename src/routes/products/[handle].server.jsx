@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
 import Layout from '../../rs-components/Layout.server';
+import { getMetafield } from '../../hooks/helper';
 
 export default function Product({ country = { isoCode: 'US' } }) {
   const { handle } = useRouteParams();
@@ -20,6 +21,13 @@ export default function Product({ country = { isoCode: 'US' } }) {
     preload: true,
   });
 
+  const response = useShopQuery({
+    query: QUERY_CATEGORIES,
+    preload: true,
+  });
+
+  const categories = response.data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'category');
+
   if (!product) {
     return <NotFound />;
   }
@@ -31,7 +39,7 @@ export default function Product({ country = { isoCode: 'US' } }) {
 
   return (
     <>
-      <Layout>
+      <Layout categories={categories}>
         <Seo type="product" data={product} />
         <ProductDetails product={product} />
       </Layout>
@@ -223,6 +231,36 @@ const QUERY = gql`
         }
       }
       vendor
+    }
+  }
+`;
+
+const QUERY_CATEGORIES = gql`
+query collections {
+    collections(first: 250) {
+      edges {
+        node {
+          title
+          id
+          handle
+          image {
+            id
+            url
+            altText
+            width
+            height
+          }
+          metafields(first: 100){
+              edges {
+                  node{ 
+                      value
+                      key
+                      namespace
+                  }
+              }
+          }
+        }
+      }
     }
   }
 `;
