@@ -95,7 +95,7 @@ export default function ProductList({ productRange, brand, search, options }) {
                             </div>
                             <div className='ProductList__featured--dropdown'>
                                 <button id="dropdownDefault" data-dropdown-toggle="dropdown" className="text-left inline-flex items-center" type="button" onClick={() => setShowDropdown(!showDropdown)}>{dropValue} <span><ArrowDownIconDark /></span></button>
-                                <div id="dropdown" className={`z-10 ${!showDropdown && 'hidden'} bg-white divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700`}>
+                                <div id="dropdown" className={`z-10 ${!showDropdown && 'hidden'} bg-white divide-y divide-gray-100 rounded dark:bg-gray-700`}>
                                     <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                         {dropDownValues().map((v, i) =>
                                             <li key={i}>

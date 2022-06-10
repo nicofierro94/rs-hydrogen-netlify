@@ -82,9 +82,11 @@ export default function Collection({
         <>
           {/* the seo object will be expose in API version 2022-04 or later */}
           {/* <Seo type="collection" data={collection} /> */}
-          <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
-            {collection.title}
-          </h1>
+          <div class="container-line mt-28 mb-12">
+            <h1 className="containerCollection__title text-center text-2xl">
+              {collection.title}
+            </h1>
+          </div>
           <h3>{colType}</h3>
           <h3>{JSON.stringify(product_ranges)}</h3>
           <div
@@ -95,8 +97,8 @@ export default function Collection({
             {/* {products.length} {products.length > 1 ? 'products' : 'product'} */}
           </p>
           {colType == 'brand' &&
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-              <div className="containerCollection__grid flex flex-row flex-wrap justify-start gap-4 mt-10 p-8">
+            <ul className="">
+              <div className="ccontainerCollection__grid grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 px-4 mb-28">
                 {prCollections.map(c => <CollectionCard collection={c} />)}
               </div>
             </ul>
