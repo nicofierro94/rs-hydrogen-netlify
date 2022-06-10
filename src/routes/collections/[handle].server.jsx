@@ -1,4 +1,4 @@
-import { useShop, useShopQuery, flattenConnection, Seo, fetchSync, Link, Image } from '@shopify/hydrogen';
+import { useShop, useShopQuery, flattenConnection, Seo, fetchSync } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import ProductList from '../../rs-components/ProductList.client';
 import LoadMoreProducts from '../../components/LoadMoreProducts.client';
@@ -6,6 +6,7 @@ import Layout from '../../rs-components/Layout.server';
 import ProductCard from '../../components/ProductCard';
 import NotFound from '../../components/NotFound.server';
 import { getMetafield } from '../../hooks/helper';
+import CollectionCard from '../../rs-components/CollectionCard.server';
 
 export default function Collection({
   country = { isoCode: 'US' },
@@ -77,7 +78,7 @@ export default function Collection({
     <Layout categories={categories}>
 
       {colType == 'product-range' ?
-        <ProductList options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} />
+        <ProductList name={collection.title} options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} />
         :
         <>
           {/* the seo object will be expose in API version 2022-04 or later */}
@@ -87,8 +88,6 @@ export default function Collection({
               {collection.title}
             </h1>
           </div>
-          <h3>{colType}</h3>
-          <h3>{JSON.stringify(product_ranges)}</h3>
           <div
             // dangerouslySetInnerHTML={{__html: collection.descriptionHtml}}
             className="text-lg"
@@ -107,26 +106,6 @@ export default function Collection({
       }
     </Layout>
   );
-}
-
-const imageLoader = ({ src }) => {
-  return `${src}&width=${480}`
-};
-
-const CollectionCard = ({ collection }) => {
-  return (
-    <div className="containerCollection__item border-2 border-sky-900">
-      <Link to={`/collections/${collection.handle}`}>
-        <div className="containerCollection__imagen-container flex justify-center items-center">
-          {collection.image
-            ? <Image data={collection.image} loader={imageLoader} />
-            : /*change no image*/ <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/No_image_3x4.svg" />
-          }
-        </div>
-        <h3 className="containerCollection__name text-center text-2xl text-white bg-sky-900">{collection.title}</h3>
-      </Link>
-    </div>
-  )
 }
 
 const QUERY = gql`

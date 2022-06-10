@@ -4,16 +4,16 @@ import CustomizeProduct from "../assets/icons/CustomizeProduct"
 import ArrowDownIconDark from "../assets/icons/ArrowDownIconDark"
 import SettingsIcon from "../assets/icons/SettingsIcon"
 import FilterModal from "./FilterModal.client"
-import { Link } from '@shopify/hydrogen';
 
 
-export default function ProductList({ productRange, brand, search, options }) {
+export default function ProductList({ productRange, brand, search, options, name }) {
 
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
     const [showFilter, setShowFilter] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [dropValue, setDropValue] = useState('option 1')
+    const [first, setFirst] = useState(true);
     const [filter, setFilter] = useState({
         pagination: {
             page: 1,
@@ -50,13 +50,27 @@ export default function ProductList({ productRange, brand, search, options }) {
         data: filter
     });
 
+    const handleScroll = (e) => {
+        if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
+            const newFilter = filter;
+            newFilter.pagination.page = newFilter.pagination.page + 1;
+            setFilter(newFilter);
+            execute();
+        }
+    }
+
     useEffect(() => {
         execute();
+        window.addEventListener("scroll", handleScroll);
     }, [])
 
     useEffect(() => {
-        setProducts(response?.result.result);
-        setTotal(response?.total);
+        if (response) {
+            const pp = products;
+            response?.result.result.forEach(p => pp.push(p))
+            setProducts(pp);
+            setTotal(response?.total);
+        }
     }, [response])
 
     const onSelect = (value) => {
@@ -76,7 +90,7 @@ export default function ProductList({ productRange, brand, search, options }) {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="SectionProductTop__category-name">
-                            <h1>Category name (TODO)</h1>
+                            <h1>{name}</h1>
                         </div>
                         <div className="SectionProductTop__result">
                             <p><span>All Sofas  1-28 (TODO)</span>  of  {total}  Results</p>

@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { getMetafield } from "../hooks/helper";
 import SearchIcon from "../assets/icons/SearchIcon"
+import { useNavigate } from "@shopify/hydrogen/client"
 
 export default function Header({ categories }) {
 
     const [showCategories, setShowCategories] = useState(false);
+
+    const nav = useNavigate();
 
     var parentCategories = categories.filter(c =>
         getMetafield(c.node.metafields, 'attributes', 'categoryLevel') == 1 &&
@@ -17,15 +20,19 @@ export default function Header({ categories }) {
         return 0
     })
 
+    const goTo = (path) => {
+        nav(path)
+    }
+
     return (
         <div onMouseLeave={() => setShowCategories(false)}>
             <div className="header flex flex-row items-center px-4">
                 <div className="logo basis-3/12"><a href="/"><img src="https://cdn.shopify.com/s/files/1/0638/9193/1378/files/FurnitureKioskLogo_CMYK_360x_6965cea3-6657-4d0d-bb00-633c2a4c94b6_300x300.jpg" alt="" /></a></div>
                 <div className="basis-6/12 text-center">
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)}>Brands</span>
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)}>Product Ranges</span>
+                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/collections?brand')}>Brands</span>
+                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/collections?product-range')}>Product Ranges</span>
                     <span className="menu" onMouseEnter={() => setShowCategories(true)}>Categories <span className="square"></span></span>
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)}>All Products</span>
+                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/products')}>All Products</span>
                 </div>
                 <div className="topUserArea loginCartbasis-3/12 text-right">
                     <div className="topUserArea__search">
