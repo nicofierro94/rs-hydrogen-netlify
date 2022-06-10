@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getMetafield } from "../hooks/helper";
+import SearchIcon from "../assets/icons/SearchIcon"
 
 export default function Header({ categories }) {
 
@@ -26,7 +27,20 @@ export default function Header({ categories }) {
                     <span className="menu" onMouseEnter={() => setShowCategories(true)}>Categories <span className="square"></span></span>
                     <span className="menu" onMouseEnter={() => setShowCategories(false)}>All Products</span>
                 </div>
-                <div className="basis-3/12 text-right">SEARCH - CART</div>
+                <div className="topUserArea loginCartbasis-3/12 text-right">
+                    <div className="topUserArea__search">
+                        <form action="">
+                            <input type="search" placeholder="Search..." />
+                            <i class="fa fa-search"><SearchIcon /></i>
+                        </form>
+                    </div>
+                    <div className="topUserArea__login">
+                        <a href='/'><SearchIcon /></a>
+                    </div>
+                    <div className="topUserArea__cart">
+                        <a href='/'><SearchIcon /></a>
+                    </div>
+                </div>
             </div>
             {showCategories &&
                 <div className='categories'>

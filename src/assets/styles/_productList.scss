@@ -353,10 +353,17 @@
                 margin-bottom: 20px;
             }
             li.nameSelected {
-                color: global.$black-icon;;
+                color: global.$black-icon;
                 font-weight: 500;
             }
+
+            input#checkSelection {
+                margin-top: 8px;                
+            }
             
+            [type='checkbox']:focus {                
+                background-color: global.$black-icon;
+            }
 
 
 
@@ -427,7 +434,7 @@
             }
 
             .container-option.grey {
-                padding: 15px;
+                padding: 15px 0;
                 display: flex;
                 justify-content: space-between;
                 margin-top: 9%;
@@ -515,5 +522,6 @@
     .modal-filter .customize-modal {
         width: 90%;
     }
+
 
 }

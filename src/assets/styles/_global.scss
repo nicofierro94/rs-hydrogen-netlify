@@ -1,5 +1,4 @@
 //////----Global Styles----//////
-
 //Container
 .product-container, .breadcrumb {
     max-width: 1390px;
@@ -19,7 +18,11 @@ $blue-kiosk  : #4c5579;
 $orange-kiosk: #FF8C60;
 
 //Fonts
-
+body {
+    h1, h2, h3, h4, h5, h6, hr, p, li {        
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
+}
 
 
 //Breakpoint
