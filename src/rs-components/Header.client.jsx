@@ -54,7 +54,7 @@ export default function Header({ categories }) {
                 </div>
             </div>
             <div className="topNavBar">
-                <div className="topNavBar__container px-8 py-3">
+                <div className="topNavBar__container">
                     <ul class="site-nav list--inline" id="SiteNav">
                                      
                         <li class="site-nav__item site-nav--active rs-type-category " aria-haspopup="true">
