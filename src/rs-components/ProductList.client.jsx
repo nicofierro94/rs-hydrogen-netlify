@@ -136,7 +136,7 @@ export default function ProductList({ productRange, brand, search, options, name
                     </div>
 
 
-                    <div className="ProductList__grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-2">
+                    <div className="ProductList__grid --openModal-- grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-2">
 
                         {products?.map((p, i) =>
                             <a key={i} href={`/products/${p._source.handle}`}>
@@ -181,12 +181,24 @@ const ProductItem = ({ product }) => {
         <div className="ProductList__product-item">
             <div className="ProductList__product-container">
                 <div className="ProductList__product-topSection">
+                    <div class="ProductList__card-section-top">
+                        <div class="card-stock">
+                            <p class="label-top red-label sale-label">Sale</p>
+                            <p class="label-top red-label clearance-label">Clearance</p>
+                            <p class="label-top red-label specialoffer-label">Special Offer</p>
+                            <p class="label-top red-label holiday-label">Holiday Savings</p>
+                        </div>
+                    </div>
                     <div className="ProductList__product-image">
                         <img src={product.images[0]} alt="" />
                     </div>
                 </div>
                 <div className="ProductList__product-bottomSection">
                     <div className="ProductList__product-description">
+                        <div class="down-section-card">
+                            <p class="label-bottom grey-label newarrival-label">New Arrival</p>
+                            <p class="label-bottom grey-label stock-label">In Stock</p>
+                        </div>
                         <div className="ProductList__product-brand">
                             <p><span>› </span>{product?.brand.title}</p>
                         </div>

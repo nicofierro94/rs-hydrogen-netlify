@@ -110,6 +110,10 @@
 
 .ProductList {
 
+    &__product-topSection {
+        min-height: 232px;
+    }
+
     &__container {
         max-width: 1400px;
         margin   : auto;
@@ -238,7 +242,7 @@
     }
 
     &__product-description {
-        padding   : 20px 20px 0px 20px;
+        padding   : 10px 20px 0px 20px;
         min-height: 120px;
     }
 
@@ -309,6 +313,45 @@
     &__product-item *[data-tooltip]:hover::after {
         opacity: 1;
     }
+
+    &__card-section-top {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        z-index: 254!important;
+        position: absolute;
+        margin: 4px 0 0 4px;
+        max-width: 300px;
+    }
+    .red-label {
+        background-color: #4162679c;
+        color: #ffffff;        
+        font-weight: 500;
+        font-size: 10px;
+        margin-right: 5px;
+        text-transform: uppercase;        
+        display: inline-block;
+        padding: 2px 10px;
+        letter-spacing: 0.5px;
+    }
+    .red-label.sale-label {
+        background-color: #FF2E00;        
+    }
+    .label-bottom {
+        background-color: #E5E5E5;
+        color: #416267;        
+        font-weight: 500;
+        font-size: 10px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        text-transform: uppercase;        
+        display: inline-block;
+        padding: 2px 10px;
+        letter-spacing: 0.5px;
+    }
+
+    
+
 
 }
 
@@ -473,6 +516,16 @@
 
 
 //---------------RESPONSIVE-----------------//
+
+//Desktop//
+@media (min-width:1024px) {
+    .openModal.lg\:grid-cols-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 75%;
+    }
+
+}
+
 //Tablet//
 @media (max-width: global.$breakpoint-laptop) {
     .ProductList__grid {
@@ -485,6 +538,22 @@
 
     .modal-filter .customize-modal {        
         min-width: 42%;  
+    }
+    
+    .ProductList__product-topSection {
+        min-height: 213px;
+    }
+    .openModal.md\:grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 66%;
+    }
+    .modal-filter .customize-modal {
+        min-width: 33%;
+        padding-left: 0px;
+        padding-right: 10px;
+    }
+    .ProductList__card-section-top {        
+        max-width: 32%;        
     }
 
 }
@@ -519,8 +588,24 @@
     .ProductList__product-title {
         font-size: 13px;
     }
+
     .modal-filter .customize-modal {
         width: 90%;
+    }
+
+    .ProductList__card-section-top {        
+        max-width: 100%;        
+    }
+
+    .filterSection__container {
+        max-width: none;
+        padding-top: 5%;
+        padding-left: 5%;
+        padding-right: 3%;
+    }
+    .openModal.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        max-width: none;
     }
 
 
