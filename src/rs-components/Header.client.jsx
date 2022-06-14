@@ -8,7 +8,7 @@ import { useNavigate } from "@shopify/hydrogen/client"
 
 export default function Header({ categories }) {
 
-    const [showCategories, setShowCategories] = useState(false);
+    const [showCategory, setShowCategory] = useState('');
 
     const nav = useNavigate();
 
@@ -23,8 +23,14 @@ export default function Header({ categories }) {
         return 0
     })
 
+    console.log(categories)
+
     const goTo = (path) => {
         nav(path)
+    }
+
+    const onHover = (handle) => {
+        setShowCategory(handle)
     }
 
     return (
@@ -56,57 +62,57 @@ export default function Header({ categories }) {
             <div className="topNavBar">
                 <div className="topNavBar__container">
                     <ul class="site-nav list--inline" id="SiteNav">
-                                     
-                        <li class="site-nav__item site-nav--active rs-type-category " aria-haspopup="true">
-                            <a href="/" class="site-nav__link site-nav__link-toggle" id="#" onclick="#" aria-controls="#" aria-expanded="false" aria-current="page" onmouseover="#">
-                                CATEGORY
-                                <span className="menu-icon-arrow-down">
-                                    <ArrowDownIconDark />
-                                </span>
-                            </a>
 
-                            {/* <div class="site-nav__dropdown meganav site-nav__dropdown--second-level" id="#" aria-labelledby="#" role="navigation">
-                                <ul class="meganav__nav page-width">
-                                    <div class="grid meganav__scroller--has-list">
-                                        <div class="grid__item meganav__list">
-
-
-                                            <li class="site-nav__dropdown-container rs-type-category">
-                                                <a href="#" onclick="#" class="meganav__link meganav__link--second-level meganav__link-toggle site-nav__link-toggle meganav__link--has-list meganav__link--active" id="#" aria-controls="#" aria-expanded="false" aria-current="page">
-                                                    SEGUNDO NIVEL
-                                                </a>
-                                                <ul class="meganav__list meganav__list--gutter">
-                                                    <li class="site-nav__dropdown-container site-nav__dropdown-container--third-level rs-type-category">
-                                                        <a href="#" class="meganav__link meganav__link--third-level">
-                                                            TERCER NIVEL
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-
-                                            <li class="site-nav__dropdown-container rs-type-category">
-                                                <a href="/collections/sofas-by-size" onclick="#" class="meganav__link meganav__link--second-level meganav__link-toggle site-nav__link-toggle meganav__link--has-list meganav__link--active" id="#" aria-controls="#" aria-expanded="false" aria-current="page">
-                                                    SEGUNDO NIVEL
-                                                </a>
-
-                                                <ul class="meganav__list meganav__list--gutter">
-
-
-                                                    <li class="site-nav__dropdown-container site-nav__dropdown-container--third-level rs-type-category">
-                                                        <a href="/collections/2-seater" class="meganav__link meganav__link--third-level">
-                                                            TERCER NIVEL
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-
-
+                        {parentCategories.map(pc => {
+                            let subCategories = getMetafield(pc.node.metafields, 'attributes', 'subCategories') ?? false
+                            subCategories = JSON.parse(subCategories);
+                            return (
+                                <li class="site-nav__item site-nav--active rs-type-category inline-block" aria-haspopup="true">
+                                    <a onMouseEnter={() => onHover(pc.node.handle)} href={`/collections/${pc.node.handle}`} class="site-nav__link site-nav__link-toggle" id="#" onclick="#" aria-controls="#" aria-expanded="false" aria-current="page" onmouseover="#">
+                                        {pc.node.title}
+                                        <span className="menu-icon-arrow-down">
+                                            <ArrowDownIconDark />
+                                        </span>
+                                    </a>
+                                    {subCategories &&
+                                        <div class={`site-nav__dropdown meganav site-nav__dropdown--second-level ${pc.node.handle != showCategory && 'hidden'}`} id="#" aria-labelledby="#" role="navigation">
+                                            <ul class="meganav__nav page-width">
+                                                <div class="grid meganav__scroller--has-list">
+                                                    <div class="grid__item meganav__list">
+                                                        {subCategories.map(sc => {
+                                                            const subCategory = categories.find(c => c.node.handle == sc)
+                                                            let subSubCategories = getMetafield(subCategory.node.metafields, 'attributes', 'subCategories') ?? false
+                                                            return (
+                                                                <li class="site-nav__dropdown-container rs-type-category">
+                                                                    <a href={`/collections/${sc}`} onclick="#" class="meganav__link meganav__link--second-level meganav__link-toggle site-nav__link-toggle meganav__link--has-list meganav__link--active" id="#" aria-controls="#" aria-expanded="false" aria-current="page">
+                                                                        {subCategory.node.title}
+                                                                    </a>
+                                                                    {subSubCategories &&
+                                                                        <ul class="meganav__list meganav__list--gutter">
+                                                                            {subSubCategories.map(ssc => {
+                                                                                const subSubCategory = categories.find(c => c.node.handle == ssc);
+                                                                                return (
+                                                                                    <li class="site-nav__dropdown-container site-nav__dropdown-container--third-level rs-type-category">
+                                                                                        <a href={`/collections/${ssc}`} class="meganav__link meganav__link--third-level">
+                                                                                            {subSubCategory.node.title}
+                                                                                        </a>
+                                                                                    </li>
+                                                                                )
+                                                                            })}
+                                                                        </ul>
+                                                                    }
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </ul>
                                         </div>
-                                    </div>
-                                </ul>
-                            </div> */}
-                        </li>
+                                    }
+                                </li>
+                            )
+                        }
+                        )}
                     </ul>
                 </div>
             </div >
