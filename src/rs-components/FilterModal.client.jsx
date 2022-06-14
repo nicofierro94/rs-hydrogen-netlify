@@ -70,44 +70,45 @@ export default function FilterModal({ show, close, options, filter, updateFilter
                             </div>
                         </div>
 
+                        <div className="filterSection__filter-container">
+                            {options?.map((group, i) =>
+                                <div className="filterSection__filter-group">
+                                    <div className="filterSection__category-container">
+                                        <div className={`container-option grey open ${i === 0 && 'first'}`}>
+                                            <div className="filterSection__accordion-title">
+                                                <span>
+                                                    <span className="arrow"><ArrowDownIcon /></span>
+                                                    <p className="option-name">{group.label}</p>
+                                                </span>
+                                            </div>
 
-                        {options?.map((group, i) =>
-                            <div className="filterSection__filter-group">
-                                <div className="filterSection__category-container">
-                                    <div className={`container-option grey open ${i === 0 && 'first'}`}>
-                                        <div className="filterSection__accordion-title">
-                                            <span>
-                                                <span className="arrow"><ArrowDownIcon /></span>
-                                                <p className="option-name">{group.label}</p>
-                                            </span>
-                                        </div>
-
-                                        <div className="filtersSelect">
-                                            {optionsSelected.filter(os => os.field === group.field).map(os =>
-                                                <div class="filtersSelect__item-select">
-                                                    <p>{os.value}</p>
-                                                    <button onClick={() => addOption(group.field, os.value)} type="button" id="buttonFilterOption" aria-label="Quitar el filtro BEAUTIFUL HOME COLLECTIONS">
-                                                        <CloseIcon />
-                                                    </button>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="filterSection__optionName">
-                                            <ul>
-                                                {group.options.map(option =>
-                                                    <li className={`${optionsSelected.findIndex(os => os.field == group.field && os.value == option.key) != -1 && 'nameSelected'}`} onClick={() => addOption(group.field, option.key)}>
-                                                        <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />
-                                                        {option.key} <span>({option.doc_count})</span>
-                                                    </li>
+                                            <div className="filtersSelect">
+                                                {optionsSelected.filter(os => os.field === group.field).map(os =>
+                                                    <div class="filtersSelect__item-select">
+                                                        <p>{os.value}</p>
+                                                        <button onClick={() => addOption(group.field, os.value)} type="button" id="buttonFilterOption" aria-label="Quitar el filtro BEAUTIFUL HOME COLLECTIONS">
+                                                            <CloseIcon />
+                                                        </button>
+                                                    </div>
                                                 )}
-                                                {/* <li className="nameSelected"><input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />Width 60” To 80”<span>(490)</span></li> */}
-                                                {/* <li><input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />Width 60” And Under<span>(120)</span></li> */}
-                                            </ul>
+                                            </div>
+                                            <div className="filterSection__optionName">
+                                                <ul>
+                                                    {group.options.map(option =>
+                                                        <li className={`${optionsSelected.findIndex(os => os.field == group.field && os.value == option.key) != -1 && 'nameSelected'}`} onClick={() => addOption(group.field, option.key)}>
+                                                            <input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />
+                                                            {option.key} <span>({option.doc_count})</span>
+                                                        </li>
+                                                    )}
+                                                    {/* <li className="nameSelected"><input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />Width 60” To 80”<span>(490)</span></li> */}
+                                                    {/* <li><input class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-neutral-100 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="checkSelection" />Width 60” And Under<span>(120)</span></li> */}
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                         {/* <div className="filterSection__bottom-area">
                             <div className="filterSection__custimizable">
                                 <div className="optionTitle">

@@ -146,18 +146,29 @@ export default function ProductList({ productRange, brand, search, options, name
                         </div>
                     </div>
 
+                    <div className="ProductList__products-area">
 
-                    <div className={`ProductList__grid ${showFilter && 'openModal'} grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-2`}>
+                        <div className={`ProductList__grid ${showFilter && 'openModal'} flex mb-2`}>
 
-                        {products?.map((p, i) =>
-                            <a key={i} href={`/products/${p._source.handle}`}>
-                                <ProductItem key={i} product={p._source} />
-                            </a>
-                        )}
+                            {products?.map((p, i) =>
+                                <a key={i} href={`/products/${p._source.handle}`}>
+                                    <ProductItem key={i} product={p._source} />
+                                </a>
+                            )}
+
+                        </div>
+
+                        <div className="collapseMenu openCollapse">
+                            FILTROS
+                        </div>
 
                     </div>
+                    
+
                 </div>
             </div>
+
+            
 
 
             {/* <div>API DE FILTROS</div>
