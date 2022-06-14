@@ -14,8 +14,8 @@
     overflow        : auto;
     background-color: rgba(0, 0, 0, 0);
     overflow-y      : hidden;
-    transition: all 1s;
-    
+    transition      : all 1s;
+
 
     .customize-modal {
         font-family     : 'Plus Jakarta Sans', sans-serif !important;
@@ -26,7 +26,7 @@
         background-color: #FFFFFF;
         margin-right    : -50%;
         transition      : all 1s;
-        border: 1px solid rgba(65, 98, 103, 0.3);
+        border          : 1px solid rgba(65, 98, 103, 0.3);
 
         .content {
             padding-top  : 5%;
@@ -160,22 +160,22 @@
     &__featured--dropdown span {
         margin-left: 100px;
     }
-    
+
     &__featured--dropdown #dropdown {
-        border-top: none;
-        position: absolute;        
-        margin-left: -15px;
-        border: 1px solid global.$black-icon;
+        border-top   : none;
+        position     : absolute;
+        margin-left  : -15px;
+        border       : 1px solid global.$black-icon;
         border-radius: 3px;
-        padding: 1px 1px;
-        font-size: 15px;
-        min-width: 200px;
-        border-top: none;
-        margin-top: 2px; 
+        padding      : 1px 1px;
+        font-size    : 15px;
+        min-width    : 200px;
+        border-top   : none;
+        margin-top   : 2px;
         border-radius: 0 0 3px 3px;
         z-index: 300;
     }
-    
+
 
 
     //--- Right Section ---//
@@ -358,56 +358,61 @@
 
 .filterSection {
 
-            &__container {
-                max-width: 300px;
-                padding-top: 5%;
-                padding-left: 5%;
-            }
+    &__container {
+        max-width   : 300px;
+        padding-top : 5%;
+        padding-left: 5%;
+    }
 
-            &__top-area {
-                display: flex;
-                justify-content: space-between;
-            }
-            .filtersSelect {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                gap: 10px;
-                margin-top: 15px;
-            }
-            .filtersSelect__item-select {
-                display: flex;
-                font-size: 12px;
-                background: #F5F7F7;
-                border-radius: 5px;
-                max-width: fit-content;
-                padding: 8px;
+    &__top-area {
+        display        : flex;
+        justify-content: space-between;
+    }
 
-            }
-            button#buttonFilterOption {
-                margin-left: 10px;
-            }
-            &__optionName {
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 34px;
-                letter-spacing: 0.02em;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-            li.nameSelected {
-                color: global.$black-icon;
-                font-weight: 500;
-            }
+    .filtersSelect {
+        display        : flex;
+        flex-direction : row;
+        flex-wrap      : wrap;
+        justify-content: space-between;
+        gap            : 10px;
+        margin-top     : 15px;
+    }
 
-            input#checkSelection {
-                margin-top: 8px;                
-            }
-            
-            [type='checkbox']:focus {                
-                background-color: global.$black-icon;
-            }
+    .filtersSelect__item-select {
+        display      : flex;
+        font-size    : 12px;
+        background   : #F5F7F7;
+        border-radius: 5px;
+        max-width    : fit-content;
+        padding      : 8px;
+
+    }
+
+    button#buttonFilterOption {
+        margin-left: 10px;
+    }
+
+    &__optionName {
+        font-weight   : 400;
+        font-size     : 12px;
+        line-height   : 34px;
+        letter-spacing: 0.02em;
+        margin-top    : 20px;
+        margin-bottom : 20px;
+    }
+
+    li.nameSelected {
+        color      : global.$black-icon;
+        font-weight: 500;
+    }
+
+    input#checkSelection {
+        margin-top: 8px;
+    }
+
+    [type='checkbox']:focus {
+        background-color: global.$black-icon;
+    }
 
 
 
@@ -416,98 +421,103 @@
 
 
 
-            &__bottom-area {
-                margin-top: 30px;
-            }
+    &__bottom-area {
+        margin-top: 30px;
+    }
 
-            &__custimizable, &__quickShip {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
+    &__custimizable,
+    &__quickShip {
+        display        : flex;
+        flex-direction : row;
+        align-items    : center;
+        justify-content: space-between;
+    }
 
-            &__customizable-button label {
-                font-weight: 600;
-                font-size  : 13px;
-                line-height: 16px;
-            }
-        
-            &__customizable-button input {
-                border-width: 1.5px;
-                border-color: rgba(65, 98, 103, 0.4);
-                height: 23px;
-                width: 23px;              
-            }
-        
-            &__customizable-button .bg-gray-300 {
-                background-color: rgba(65, 98, 103, 0.4);
-                height: 23px;               
-            }
+    &__customizable-button label {
+        font-weight: 600;
+        font-size  : 13px;
+        line-height: 16px;
+    }
 
-            &__customizable-button span {
-                font-weight: 300;
-                margin-left: 10px;               
-            }
+    &__customizable-button input {
+        border-width: 1.5px;
+        border-color: rgba(65, 98, 103, 0.4);
+        height      : 23px;
+        width       : 23px;
+    }
 
-            path {
-                fill: global.$black-icon;
-            }
-        
-            .toggle-checkbox:checked {
-                right       : 0;
-                border-color: global.$black-icon;
-            }
-        
-            .toggle-checkbox:checked+.toggle-label {
-                background-color: global.$black-icon;
-            }
+    &__customizable-button .bg-gray-300 {
+        background-color: rgba(65, 98, 103, 0.4);
+        height          : 23px;
+    }
 
-            &__quickShip {
-                margin-top: 20px;
-            }
-            a.addZip {
-                font-size: 13px;
-                font-weight: 600;
-                text-decoration: underline;
-                margin-right: 10px;
-            }
+    &__customizable-button span {
+        font-weight: 300;
+        margin-left: 10px;
+    }
 
-            .box-icon {
-                display: flex;
-            }
+    path {
+        fill: global.$black-icon;
+    }
 
-            .container-option.grey {
-                padding: 15px 0;
-                display: flex;
-                justify-content: space-between;
-                margin-top: 9%;
-                cursor: pointer;
-                width: 100%;
-                flex-direction: column;
-                flex-wrap: nowrap;
-                border-top: 1px solid rgba(65, 98, 103, 0.3);
-                border-bottom: 1px solid rgba(65, 98, 103, 0.3);
-            }
+    .toggle-checkbox:checked {
+        right       : 0;
+        border-color: global.$black-icon;
+    }
 
-            &__accordion-title span {
-                display: flex;
-                align-items: center;
-                letter-spacing: .5px;
-            }
+    .toggle-checkbox:checked+.toggle-label {
+        background-color: global.$black-icon;
+    }
 
-            p.option-name {
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 16px;
-                letter-spacing: 0.06em;
-                text-transform: uppercase;
-                margin-left: 13px;
-            }
+    &__quickShip {
+        margin-top: 20px;
+    }
 
-            &__optionName span {
-                margin-left: 8px;
-            }
+    a.addZip {
+        font-size      : 13px;
+        font-weight    : 600;
+        text-decoration: underline;
+        margin-right   : 10px;
+    }
+
+    .box-icon {
+        display: flex;
+    }
+
+    .container-option.grey {
+        padding        : 15px 0;
+        display        : flex;
+        justify-content: space-between;
+        margin-top     : 9%;
+        cursor         : pointer;
+        width          : 100%;
+        flex-direction : column;
+        flex-wrap      : nowrap;
+        border-bottom  : 1px solid rgba(65, 98, 103, 0.3);
+
+        &.first {
+            border-top: 1px solid rgba(65, 98, 103, 0.3);
+        }
+    }
+
+    &__accordion-title span {
+        display       : flex;
+        align-items   : center;
+        letter-spacing: .5px;
+    }
+
+    p.option-name {
+        font-weight   : 600;
+        font-size     : 12px;
+        line-height   : 16px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-left   : 13px;
+    }
+
+    &__optionName span {
+        margin-left: 8px;
+    }
 
 }
 
@@ -537,8 +547,8 @@
         padding: 40px 15px;
     }
 
-    .modal-filter .customize-modal {        
-        min-width: 42%;  
+    .modal-filter .customize-modal {
+        min-width: 42%;
     }
     
     .ProductList__product-topSection {

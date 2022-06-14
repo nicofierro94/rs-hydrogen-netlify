@@ -12,8 +12,8 @@ export default function ProductList({ productRange, brand, search, options, name
     const [total, setTotal] = useState(0);
     const [showFilter, setShowFilter] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [dropValue, setDropValue] = useState('option 1')
-    const [first, setFirst] = useState(true);
+    const [dropValue, setDropValue] = useState('option 1');
+    const [optionFilters, setOptionFilters] = useState();
     const [filter, setFilter] = useState({
         pagination: {
             page: 1,
@@ -32,6 +32,11 @@ export default function ProductList({ productRange, brand, search, options, name
     });
 
     const dropDownValues = () => ['option 1', 'option 2', 'option 3', 'option 4']
+
+    const updateFilter = (updatedFilter) => {
+        setFilter(updatedFilter);
+        execute(updatedFilter);
+    }
 
     const clickFilter = () => {
         document.body.style.overflow = 'hidden';
@@ -55,21 +60,27 @@ export default function ProductList({ productRange, brand, search, options, name
             const newFilter = filter;
             newFilter.pagination.page = newFilter.pagination.page + 1;
             setFilter(newFilter);
-            execute();
+            execute(newFilter);
         }
     }
 
     useEffect(() => {
-        execute();
+        execute(filter);
         window.addEventListener("scroll", handleScroll);
     }, [])
 
     useEffect(() => {
         if (response) {
-            const pp = products;
-            response?.result.result.forEach(p => pp.push(p))
-            setProducts(pp);
+            if (filter.pagination.page == 1) {
+                setProducts(response?.result.result);
+            }
+            else {
+                const pp = products;
+                response?.result.result.forEach(p => pp.push(p))
+                setProducts(pp);
+            }
             setTotal(response?.total);
+            setOptionFilters(response?.options_filters);
         }
     }, [response])
 
@@ -81,7 +92,7 @@ export default function ProductList({ productRange, brand, search, options, name
     if (loading) return <h2>LOADING...</h2>
     else return (
         <>
-            <FilterModal show={showFilter} close={hideModal} />
+            <FilterModal show={showFilter} close={hideModal} options={optionFilters?.options} filter={filter} updateFilter={updateFilter} />
 
             <div className="SectionProductTop">
                 <div className="SectionProductTop__container">
@@ -136,7 +147,7 @@ export default function ProductList({ productRange, brand, search, options, name
                     </div>
 
 
-                    <div className="ProductList__grid --openModal-- grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-2">
+                    <div className={`ProductList__grid ${showFilter && 'openModal'} grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-2`}>
 
                         {products?.map((p, i) =>
                             <a key={i} href={`/products/${p._source.handle}`}>

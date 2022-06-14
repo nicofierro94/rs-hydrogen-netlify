@@ -19,8 +19,12 @@ const useAxios = (axiosParams) => {
         }
     };
 
-    const execute = () => {
-        fetchData(axiosParams)
+    const execute = (data) => {
+        const ax = { 
+            ...axiosParams,
+            data
+        }
+        fetchData(ax)
     }
 
     // useEffect(() => {

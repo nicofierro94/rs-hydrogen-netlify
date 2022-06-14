@@ -65,7 +65,7 @@ export default function Header({ categories }) {
                                 </span>
                             </a>
 
-                            <div class="site-nav__dropdown meganav site-nav__dropdown--second-level" id="#" aria-labelledby="#" role="navigation">
+                            {/* <div class="site-nav__dropdown meganav site-nav__dropdown--second-level" id="#" aria-labelledby="#" role="navigation">
                                 <ul class="meganav__nav page-width">
                                     <div class="grid meganav__scroller--has-list">
                                         <div class="grid__item meganav__list">
@@ -105,7 +105,7 @@ export default function Header({ categories }) {
                                         </div>
                                     </div>
                                 </ul>
-                            </div>
+                            </div> */}
                         </li>
                     </ul>
                 </div>
