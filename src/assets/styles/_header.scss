@@ -2,7 +2,7 @@
 
 .header {
     min-height   : 83px;
-    border-bottom: 2px solid global.$blue !important;
+    border-bottom: 1px solid #E5E5E5 !important;
 
     .logo img {
         max-width: 195px;
@@ -26,9 +26,15 @@
 .menu:hover {
     border-bottom: 1px solid;
 }
+ul#SiteNav {
+    border-bottom: 1px solid #E5E5E5 !important;
+    padding: 10px 0;
+}
 
 .topNavBar {
-    
+
+
+    text-align: center;
     
     .menu-icon-arrow-down svg {
         position: relative;
@@ -45,7 +51,8 @@
         text-transform: uppercase;
         font-weight: 500;
         padding: 12px 21px;
-        color: #211f21;
+        color: global.$grey-letters;
+        line-height: 34px;
     }
     .grid__item.meganav__list {
         display: flex;
@@ -54,12 +61,13 @@
     }
     ul.meganav__nav.page-width {
         max-width: none;
-        padding: 20px 40px!important;
+        padding: 30px 40px!important;
         width: 100vw;
     }
     .meganav__link--second-level {
         font-weight: 600;
-        font-size: 12px;
+        font-size: 13px;
+        color: global.$grey-letters;
     }
     .site-nav__dropdown-container--third-level {
         font-weight: 400;
@@ -68,11 +76,20 @@
     .site-nav__dropdown--second-level {        
         position: absolute;
         z-index: 254;
-        background-color: white;
+        background-color: #ffffff;        
+        left: 0;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+    }
+    li.site-nav__item {
+        position: inherit !important;
     }
 
 
     }
+
+
 
 .categories {
     display           : flex;
@@ -204,3 +221,4 @@
         margin-right: 20px;
     }
 }
+
