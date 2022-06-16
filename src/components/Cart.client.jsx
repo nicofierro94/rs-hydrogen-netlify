@@ -29,7 +29,7 @@ export default function Cart() {
     <>
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <div
-        className={`z-20 fixed top-0 bottom-0 left-0 right-0 bg-black transition-opacity duration-400 ${
+        className={`z-20 fixed top-0 bottom-0 left-0 right-0 transition-opacity duration-400 ${
           isCartOpen ? 'opacity-20' : 'opacity-0 pointer-events-none'
         }`}
         onClick={isCartOpen ? closeCart : null}
