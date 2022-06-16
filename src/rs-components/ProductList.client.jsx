@@ -55,13 +55,13 @@ export default function ProductList({ productRange, brand, category, search, opt
     const clickFilter = () => {
         if (showFilter == true) hideModal();
         else {
-            document.body.style.overflow = 'hidden';
+            // document.body.style.overflow = 'hidden';
             setShowFilter(true);
         }
     }
 
     const hideModal = () => {
-        document.body.style.overflow = 'unset';
+        // document.body.style.overflow = 'unset';
         setShowFilter(false);
     }
 

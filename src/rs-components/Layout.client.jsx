@@ -1,12 +1,12 @@
 import Header from './Header.client';
 import Footer from './Footer.client';
 import { useEffect } from 'react';
-import { useRouteParams } from '@shopify/hydrogen';
+import Cart from '../components/Cart.client';
 
 export default function Layout({ children, categories, breadcrumb }) {
 
     useEffect(() => {
-        if(breadcrumb == '') return;
+        if (breadcrumb == '') return;
         const noDuplicates = breadcrumb?.filter((bd, i) => breadcrumb.lastIndexOf(bd) == i)
         console.log('no', noDuplicates)
         if (noDuplicates?.length == 0) localStorage.bdcb = JSON.stringify(breadcrumb);
@@ -37,6 +37,7 @@ export default function Layout({ children, categories, breadcrumb }) {
             </div>
             <div className="min-h-screen max-w-screen text-gray-700 font-sans">
                 <Header categories={categories} />
+                <Cart />
                 <main role="main" id="mainContent" className="relative">
                     <div className="">
                         {children}

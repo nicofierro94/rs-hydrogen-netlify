@@ -5,6 +5,7 @@ import CartIcon from "../assets/icons/CartIcon"
 import UserIcon from "../assets/icons/UserIcon"
 import ArrowDownIconDark from "../assets/icons/ArrowDownIconDark"
 import { useNavigate } from "@shopify/hydrogen/client"
+import CartToggle from '../components/CartToggle.client';
 
 export default function Header({ categories }) {
 
@@ -58,7 +59,12 @@ export default function Header({ categories }) {
                         <a href='/'><UserIcon /></a>
                     </div>
                     <div className="topUserArea__cart">
-                        <a href='/'><CartIcon /></a>
+                        {/* <a href='/'><CartIcon /></a> */}
+                        <CartToggle
+                            handleClick={() => {
+                                if (isMobileNavOpen) setIsMobileNavOpen(false);
+                            }}
+                        />
                     </div>
                 </div>
             </div>
