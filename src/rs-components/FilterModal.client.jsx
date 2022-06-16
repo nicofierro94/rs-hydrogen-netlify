@@ -60,12 +60,11 @@ export default function FilterModal({ show, close, options, filter, updateFilter
     }
 
     return (
-        // <div className={`modal-filter ${show && 'show'}`}>
         <div className={`collapseMenu ${show && 'openCollapse'}`}>
-            <div onClick={close}></div>
+            {/* <div onClick={close}></div> */}
             <div className={`customize-modal ${show && 'show'}`}>
                 <div className="content">
-                    <span className="back" onClick={clickClose}><ArrowRightIcon /></span>
+                    {/* <span className="back" onClick={clickClose}><ArrowRightIcon /></span> */}
                 </div>
                 <div className="filterSection">
                     <div className="filterSection__container">

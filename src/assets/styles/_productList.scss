@@ -547,7 +547,7 @@
         &.open {
             align-items   : flex-start;
             border-width  : 0px;
-            padding       : 16px;
+            // padding       : 16px;
             padding-right : 0px;
             flex-direction: column;
 
@@ -698,7 +698,7 @@
     width: 0;    
     top: 0;
     right: 0;
-    background-color: rgb(147, 43, 43);
+    background-color: #FFFFFF;
     overflow-x: hidden;
     transition: 0.5s;
     /* display: none; */
