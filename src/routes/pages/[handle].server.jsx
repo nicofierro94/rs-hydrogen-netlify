@@ -1,7 +1,7 @@
 import {useShop, useShopQuery, Seo} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import Layout from '../../components/Layout.server';
+import Layout from '../../rs-components/Layout.client';
 import NotFound from '../../components/NotFound.server';
 
 export default function Page({params}) {

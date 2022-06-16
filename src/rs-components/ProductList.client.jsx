@@ -6,7 +6,7 @@ import SettingsIcon from "../assets/icons/SettingsIcon"
 import FilterModal from "./FilterModal.client"
 
 
-export default function ProductList({ productRange, brand, search, options, name }) {
+export default function ProductList({ productRange, brand, category, search, options, name }) {
 
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
@@ -14,14 +14,15 @@ export default function ProductList({ productRange, brand, search, options, name
     const [showDropdown, setShowDropdown] = useState(false);
     const [dropValue, setDropValue] = useState('option 1');
     const [optionFilters, setOptionFilters] = useState();
+    const [breadcrumb, setBreadcrumb] = useState();
     const [filter, setFilter] = useState({
         pagination: {
             page: 1,
             limit: 24
         },
         options: [],
-        search: "",
-        category: "",
+        search: search,
+        category: category,
         brand_handler: brand,
         product_range_handler: productRange,
         price_range: {
@@ -31,6 +32,19 @@ export default function ProductList({ productRange, brand, search, options, name
         sort: []
     });
 
+    useEffect(() => {
+        try {
+            setBreadcrumb(JSON.parse(localStorage.bdcb));
+        }
+        catch {
+            setBreadcrumb(undefined);
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log(breadcrumb);
+    }, [breadcrumb])
+
     const dropDownValues = () => ['option 1', 'option 2', 'option 3', 'option 4']
 
     const updateFilter = (updatedFilter) => {
@@ -39,8 +53,11 @@ export default function ProductList({ productRange, brand, search, options, name
     }
 
     const clickFilter = () => {
-        document.body.style.overflow = 'hidden';
-        setShowFilter(true);
+        if (showFilter == true) hideModal();
+        else {
+            document.body.style.overflow = 'hidden';
+            setShowFilter(true);
+        }
     }
 
     const hideModal = () => {
@@ -92,12 +109,13 @@ export default function ProductList({ productRange, brand, search, options, name
     if (loading) return <h2>LOADING...</h2>
     else return (
         <>
-            <FilterModal show={showFilter} close={hideModal} options={optionFilters?.options} filter={filter} updateFilter={updateFilter} />
-
             <div className="SectionProductTop">
                 <div className="SectionProductTop__container">
                     <div className="SectionProductTop__breadcrumb">
-                        <a href="/" title="Home">Home</a><span aria-hidden="true">›</span><span>TODO</span>
+                        <a href="/" title="Home">Home</a>
+                        {breadcrumb?.map(bc =>
+                            <><span aria-hidden="true">›</span><a href={`/collections/${bc.handle}`} title="Home">{bc.label}</a></>
+                        )}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="SectionProductTop__category-name">
@@ -109,8 +127,6 @@ export default function ProductList({ productRange, brand, search, options, name
                     </div>
                 </div>
             </div>
-
-
             <div className="ProductList">
                 <div className="ProductList__container">
                     <div className="ProductList__filters grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -131,68 +147,34 @@ export default function ProductList({ productRange, brand, search, options, name
                                 </div>
                             </div>
                         </div>
-
-                        <div className="ProductList__right-section">
-                            <div className="ProductList__customizable-button">
-                                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                    <input type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white appearance-none cursor-pointer" />
-                                    <label htmlFor="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                        {showFilter == false &&
+                            <div className="ProductList__right-section">
+                                <div className="ProductList__customizable-button">
+                                    <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                        <input type="checkbox" name="toggle" id="toggle" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white appearance-none cursor-pointer" />
+                                        <label htmlFor="toggle" className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                    </div>
+                                    <label htmlFor="toggle">Customizable</label>
                                 </div>
-                                <label htmlFor="toggle">Customizable</label>
+                                <div className="ProductList__clear-button">
+                                    <button type="button">Clear All </button>
+                                </div>
                             </div>
-                            <div className="ProductList__clear-button">
-                                <button type="button">Clear All </button>
-                            </div>
-                        </div>
+                        }
                     </div>
-
                     <div className="ProductList__products-area">
-
                         <div className={`ProductList__grid ${showFilter && 'openModal'} flex mb-2`}>
-
                             {products?.map((p, i) =>
                                 <a key={i} href={`/products/${p._source.handle}`}>
                                     <ProductItem key={i} product={p._source} />
                                 </a>
                             )}
-
                         </div>
 
-                        <div className="collapseMenu openCollapse">
-                            FILTROS
-                        </div>
-
+                        <FilterModal show={showFilter} close={hideModal} options={optionFilters?.options} filter={filter} updateFilter={updateFilter} />
                     </div>
-                    
-
                 </div>
             </div>
-
-            
-
-
-            {/* <div>API DE FILTROS</div>
-            <h2>Product Range:{productRange}</h2>
-            <h2>Brand: {brand}</h2>
-            <h2>Search: {search}</h2>
-
-            <br />
-
-            {response.options_filters.options.map(o =>
-                <div>
-                    <b>{o.label}</b>
-                    {o.options.map(oo => <li>{oo.key} ({oo.doc_count})</li>)}
-                </div>
-            )}
-
-            <br />
-
-            <b>Products : Total({total})</b>
-
-            <ul>
-                {products?.map(p =>
-                    <li>{p._source.title}</li>)}
-            </ul> */}
         </>
     )
 }

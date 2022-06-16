@@ -2,7 +2,7 @@ import { useShop, useShopQuery, flattenConnection, Seo, fetchSync } from '@shopi
 import gql from 'graphql-tag';
 import ProductList from '../../rs-components/ProductList.client';
 import LoadMoreProducts from '../../components/LoadMoreProducts.client';
-import Layout from '../../rs-components/Layout.server';
+import Layout from '../../rs-components/Layout.client';
 import ProductCard from '../../components/ProductCard';
 import NotFound from '../../components/NotFound.server';
 import { getMetafield } from '../../hooks/helper';
@@ -11,7 +11,7 @@ import CollectionCard from '../../rs-components/CollectionCard.server';
 export default function Collection({
   country = { isoCode: 'US' },
   collectionProductCount = 24,
-  params,
+  params
 }) {
   const { handle } = params;
 
@@ -51,6 +51,14 @@ export default function Collection({
     }).json();
   }
 
+  if (collection.metafield.value == 'category') {
+    var options = fetchSync(`https://nazzq9i1k7.execute-api.us-east-1.amazonaws.com/rs-filter-api/option?search=&category=${handle}`, {
+      headers: {
+        store: 'websystem-m6beds-staging.myshopify.com'
+      }
+    }).json();
+  }
+
   if (collection.metafield.value == 'brand') {
     var options = fetchSync(`https://nazzq9i1k7.execute-api.us-east-1.amazonaws.com/rs-filter-api/option?search=&brand_handler=${handle}`, {
       headers: {
@@ -75,11 +83,17 @@ export default function Collection({
   }
 
   return (
-    <Layout categories={categories}>
+    <Layout categories={categories} breadcrumb={colType != 'category' ? [{ label: collection.title, handle: collection.handle }] : ''}>
 
-      {colType == 'product-range' ?
-        <ProductList name={collection.title} options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} />
-        :
+      {colType == 'category' &&
+        <ProductList name={collection.title} options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} category={colType == 'category' ? handle : ""} />
+      }
+
+      {colType == 'product-range' &&
+        <ProductList name={collection.title} options={options} productRange={colType == 'product-range' ? handle : ""} brand={colType == 'brand' ? handle : ""} category={colType == 'category' ? handle : ""} />
+      }
+
+      {colType == 'brand' &&
         <>
           {/* the seo object will be expose in API version 2022-04 or later */}
           {/* <Seo type="collection" data={collection} /> */}

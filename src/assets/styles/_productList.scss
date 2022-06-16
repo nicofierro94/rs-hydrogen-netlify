@@ -173,7 +173,7 @@
         border-top   : none;
         margin-top   : 2px;
         border-radius: 0 0 3px 3px;
-        z-index: 300;
+        z-index      : 300;
     }
 
 
@@ -316,63 +316,78 @@
     }
 
     &__card-section-top {
-        display: flex;
+        display        : flex;
         justify-content: space-between;
-        padding: 10px;
-        z-index: 254!important;
-        position: absolute;
-        margin: 4px 0 0 4px;
-        max-width: 300px;
+        padding        : 10px;
+        z-index        : 254 !important;
+        position       : absolute;
+        margin         : 4px 0 0 4px;
+        max-width      : 300px;
     }
+
     .red-label {
         background-color: #4162679c;
-        color: #ffffff;        
-        font-weight: 500;
-        font-size: 10px;
-        margin-right: 5px;
-        text-transform: uppercase;        
-        display: inline-block;
-        padding: 2px 10px;
-        letter-spacing: 0.5px;
+        color           : #ffffff;
+        font-weight     : 500;
+        font-size       : 10px;
+        margin-right    : 5px;
+        text-transform  : uppercase;
+        display         : inline-block;
+        padding         : 2px 10px;
+        letter-spacing  : 0.5px;
     }
+
     .red-label.sale-label {
-        background-color: #FF2E00;        
+        background-color: #FF2E00;
     }
+
     .label-bottom {
         background-color: #E5E5E5;
-        color: #416267;        
-        font-weight: 500;
-        font-size: 10px;
-        margin-right: 5px;
-        margin-bottom: 10px;
-        text-transform: uppercase;        
-        display: inline-block;
-        padding: 2px 10px;
-        letter-spacing: 0.5px;
+        color           : #416267;
+        font-weight     : 500;
+        font-size       : 10px;
+        margin-right    : 5px;
+        margin-bottom   : 10px;
+        text-transform  : uppercase;
+        display         : inline-block;
+        padding         : 2px 10px;
+        letter-spacing  : 0.5px;
     }
-    
+
     &__products-area {
-        display: flex;
-        max-width: 1400px;
+        display       : flex;
+        max-width     : 1400px;
         flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: flex-start;
+        flex-wrap     : nowrap;
+        align-items   : flex-start;
     }
 
 
-    
-    
+    .collapseMenu {
+        height    : 100vh;
+        width     : 0;
+        z-index   : 1;
+        top       : 0;
+        right     : 0;
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
 
-    &__grid {        
+    .collapseMenu.openCollapse {
+        width: 100%;
+
+    }
+
+    &__grid {
         flex-direction: row;
-        flex-wrap: wrap;        
+        flex-wrap     : wrap;
     }
 
     &__product-item {
         max-width: 304px;
     }
 
-    
+
 
 }
 
@@ -391,10 +406,11 @@
         display        : flex;
         justify-content: space-between;
     }
+
     &__filter-container {
         overflow-y: auto;
-        height: 99vh;
-        margin-top: 9%;        
+        height    : 99vh;
+        margin-top: 9%;
     }
 
     .filtersSelect {
@@ -440,6 +456,7 @@
     [type='checkbox']:focus {
         background-color: global.$black-icon;
     }
+
     .form-check-input:checked[type=checkbox] {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
     }
@@ -516,12 +533,33 @@
     .container-option.grey {
         padding        : 15px 0;
         display        : flex;
-        justify-content: space-between;        
+        justify-content: space-between;
         cursor         : pointer;
         width          : 100%;
         flex-direction : column;
         flex-wrap      : nowrap;
         border-bottom  : 1px solid rgba(65, 98, 103, 0.3);
+
+        .filterSection__optionName {
+            display: none;
+        }
+
+        &.open {
+            align-items   : flex-start;
+            border-width  : 0px;
+            padding       : 16px;
+            padding-right : 0px;
+            flex-direction: column;
+
+            .arrow {
+                background-color: global.$white;
+                transform       : rotate(180deg);
+            }
+
+            .filterSection__optionName {
+                display: flex;
+            }
+        }
 
         &.first {
             border-top: 1px solid rgba(65, 98, 103, 0.3);
@@ -561,7 +599,7 @@
 @media (min-width:1024px) {
     .openModal.lg\:grid-cols-4 {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        max-width: 75%;
+        max-width            : 75%;
     }
 
 }
@@ -579,20 +617,27 @@
     .modal-filter .customize-modal {
         min-width: 42%;
     }
-    
+
     .ProductList__product-topSection {
         min-height: 213px;
     }
-    
+
+    .openModal.md\:grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width            : 66%;
+    }
+
     .modal-filter .customize-modal {
-        min-width: 33%;
-        padding-left: 0px;
+        min-width    : 33%;
+        padding-left : 0px;
         padding-right: 10px;
     }
-    .ProductList__card-section-top {        
-        max-width: 32%;        
-    }    
-    .ProductList__grid {        
+
+    .ProductList__card-section-top {
+        max-width: 32%;
+    }
+
+    .ProductList__grid {
         justify-content: space-evenly;
     }
 
@@ -633,14 +678,14 @@
         width: 90%;
     }
 
-    .ProductList__card-section-top {        
-        max-width: 100%;        
+    .ProductList__card-section-top {
+        max-width: 100%;
     }
 
     .filterSection__container {
-        max-width: none;
-        padding-top: 5%;
-        padding-left: 5%;
+        max-width    : none;
+        padding-top  : 5%;
+        padding-left : 5%;
         padding-right: 3%;
     }
     
@@ -664,4 +709,10 @@
 }
 .ProductList .collapseMenu.openCollapse {
     width: 25%;
+
+    .openModal.md\:grid-cols-3 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        max-width            : none;
+    }
+
 }

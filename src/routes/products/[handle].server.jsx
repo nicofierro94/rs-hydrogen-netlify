@@ -2,7 +2,7 @@ import { useShop, useShopQuery, Seo, useRouteParams } from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import ProductDetails from '../../rs-components/ProductDetails.client';
 import NotFound from '../../components/NotFound.server';
-import Layout from '../../rs-components/Layout.server';
+import Layout from '../../rs-components/Layout.client';
 import { getMetafield } from '../../hooks/helper';
 
 export default function Product({ country = { isoCode: 'US' } }) {
@@ -231,6 +231,7 @@ const QUERY = gql`
         }
       }
       vendor
+      productType
     }
   }
 `;

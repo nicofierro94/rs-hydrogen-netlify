@@ -84,8 +84,8 @@ export default function ProductDetails({ product }) {
 
                     <div className="product-options lg:pl-20 lg:pr-36 md:px-10 sm:px-10">
                         <h2>{product.title}</h2>
-                        <div className="breadcrumb">› TODO</div>
-                        <div className="breadcrumb">› TODO</div>
+                        <div className="breadcrumb">› {product.vendor}</div>
+                        <div className="breadcrumb">› {product.productType}</div>
                         <div className="price">
                             <span>
                                 {priceRange.minVariantPrice.amount == priceRange.maxVariantPrice.amount ?

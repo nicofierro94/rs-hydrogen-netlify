@@ -1,7 +1,8 @@
-import Layout from "../rs-components/Layout.server";
+import Layout from "../rs-components/Layout.client";
 import gql from 'graphql-tag';
 import { Link, useShopQuery, Image, CacheDays, Seo } from "@shopify/hydrogen";
 import { getMetafield } from "../hooks/helper";
+import { useEffect } from "react";
 
 export default function Index() {
     const { data } = useShopQuery({
@@ -9,14 +10,12 @@ export default function Index() {
         preload: true,
     });
 
-    
-
     const brands = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'brand');
     const productRanges = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'product-range');
     const categories = data.collections.edges.filter(c => getMetafield(c.node.metafields, 'attributes', 'collectionType') == 'category');
 
     return (
-        <Layout categories={categories}>
+        <Layout categories={categories} breadcrumb={[]}>
             <SeoForHomepage />
             <div className="containerHero flex justify-center items-center">
                 <div className="containerHero__textArea">

@@ -23,10 +23,13 @@ export default function Header({ categories }) {
         return 0
     })
 
-    console.log(categories)
-
     const goTo = (path) => {
         nav(path)
+    }
+
+    const goToCategory = (handle, breadcrumb) => {
+        localStorage.bdcb = JSON.stringify(breadcrumb);
+        nav(`/collections/${handle}`)
     }
 
     const onHover = (handle) => {
@@ -34,19 +37,19 @@ export default function Header({ categories }) {
     }
 
     return (
-        <div onMouseLeave={() => setShowCategories(false)}>
+        <div onMouseLeave={() => setShowCategory(false)}>
             <div className="header flex flex-row items-center px-8">
                 <div className="logo basis-3/12"><a href="/"><img src="https://cdn.shopify.com/s/files/1/0638/9193/1378/files/FurnitureKioskLogo_CMYK_360x_6965cea3-6657-4d0d-bb00-633c2a4c94b6_300x300.jpg" alt="" /></a></div>
                 <div className="basis-6/12 text-center">
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/collections?brand')}>Brands</span>
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/collections?product-range')}>Product Ranges</span>
-                    <span className="menu" onMouseEnter={() => setShowCategories(false)} onClick={() => goTo('/products')}>All Products</span>
+                    <span className="menu" onMouseEnter={() => setShowCategory(false)} onClick={() => goTo('/collections?brand')}>Brands</span>
+                    <span className="menu" onMouseEnter={() => setShowCategory(false)} onClick={() => goTo('/collections?product-range')}>Product Ranges</span>
+                    <span className="menu" onMouseEnter={() => setShowCategory(false)} onClick={() => goTo('/products')}>All Products</span>
                 </div>
                 <div className="topUserArea loginCart basis-3/12 text-right">
                     <div className="topUserArea__search-container">
                         <div className="topUserArea__search">
-                            <form action="">
-                                <input type="search" placeholder="Search..." />
+                            <form action={`/products`} method="GET">
+                                <input name="search" type="search" placeholder="Search..." />
                                 <i class="fa fa-search"><SearchIcon /></i>
                             </form>
                         </div>
@@ -68,11 +71,13 @@ export default function Header({ categories }) {
                             subCategories = JSON.parse(subCategories);
                             return (
                                 <li class="site-nav__item site-nav--active rs-type-category inline-block" aria-haspopup="true">
-                                    <a onMouseEnter={() => onHover(pc.node.handle)} href={`/collections/${pc.node.handle}`} class="site-nav__link site-nav__link-toggle" id="#" onclick="#" aria-controls="#" aria-expanded="false" aria-current="page" onmouseover="#">
+                                    <a onMouseEnter={() => onHover(pc.node.handle)} href="" onClick={() => goToCategory(pc.node.handle, [{ label: pc.node.title, handle: pc.node.handle }])} class="site-nav__link site-nav__link-toggle" id="#" onclick="#" aria-controls="#" aria-expanded="false" aria-current="page" onmouseover="#">
                                         {pc.node.title}
-                                        <span className="menu-icon-arrow-down">
-                                            <ArrowDownIconDark />
-                                        </span>
+                                        {subCategories &&
+                                            <span className="menu-icon-arrow-down">
+                                                <ArrowDownIconDark />
+                                            </span>
+                                        }
                                     </a>
                                     {subCategories &&
                                         <div class={`site-nav__dropdown meganav site-nav__dropdown--second-level ${pc.node.handle != showCategory && 'hidden'}`} id="#" aria-labelledby="#" role="navigation">
@@ -84,7 +89,7 @@ export default function Header({ categories }) {
                                                             let subSubCategories = getMetafield(subCategory.node.metafields, 'attributes', 'subCategories') ?? false
                                                             return (
                                                                 <li class="site-nav__dropdown-container rs-type-category">
-                                                                    <a href={`/collections/${sc}`} onclick="#" class="meganav__link meganav__link--second-level meganav__link-toggle site-nav__link-toggle meganav__link--has-list meganav__link--active" id="#" aria-controls="#" aria-expanded="false" aria-current="page">
+                                                                    <a href="" onClick={() => goToCategory(sc, [{ label: pc.node.title, handle: pc.node.handle }, { label: subCategory.node.title, handle: sc }])} class="meganav__link meganav__link--second-level meganav__link-toggle site-nav__link-toggle meganav__link--has-list meganav__link--active" id="#" aria-controls="#" aria-expanded="false" aria-current="page">
                                                                         {subCategory.node.title}
                                                                     </a>
                                                                     {subSubCategories &&
@@ -93,7 +98,7 @@ export default function Header({ categories }) {
                                                                                 const subSubCategory = categories.find(c => c.node.handle == ssc);
                                                                                 return (
                                                                                     <li class="site-nav__dropdown-container site-nav__dropdown-container--third-level rs-type-category">
-                                                                                        <a href={`/collections/${ssc}`} class="meganav__link meganav__link--third-level">
+                                                                                        <a href="" onClick={() => goToCategory(ssc, [{ label: pc.node.title, handle: pc.node.handle }, { label: subCategory.node.title, handle: sc }, { label: subSubCategory.node.title, handle: ssc }])} class="meganav__link meganav__link--third-level">
                                                                                             {subSubCategory.node.title}
                                                                                         </a>
                                                                                     </li>

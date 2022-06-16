@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { getMetafield } from "../../hooks/helper";
 import NotFound from "../../components/NotFound.server";
 import CollectionCard from "../../rs-components/CollectionCard.server";
-import Layout from "../../rs-components/Layout.server";
+import Layout from "../../rs-components/Layout.client";
 
 export default function Collections(request) {
 

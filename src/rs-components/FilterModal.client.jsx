@@ -8,10 +8,17 @@ import { useState, useEffect } from "react";
 export default function FilterModal({ show, close, options, filter, updateFilter }) {
 
     const [optionsSelected, setOptionsSelected] = useState([])
+    const [openFields, setOpenFields] = useState([])
 
     const clickClose = () => {
         close();
-        console.log(options)
+    }
+
+    const addField = (field) => {
+        if (openFields.indexOf(field) == -1)
+            setOpenFields(old => [...old, field])
+        else
+            setOpenFields(old => old.filter(f => f != field))
     }
 
     useEffect(() => {
@@ -53,7 +60,8 @@ export default function FilterModal({ show, close, options, filter, updateFilter
     }
 
     return (
-        <div className={`modal-filter ${show && 'show'}`}>
+        // <div className={`modal-filter ${show && 'show'}`}>
+        <div className={`collapseMenu ${show && 'openCollapse'}`}>
             <div onClick={close}></div>
             <div className={`customize-modal ${show && 'show'}`}>
                 <div className="content">
@@ -69,14 +77,13 @@ export default function FilterModal({ show, close, options, filter, updateFilter
                                 <button type="button">Clear All </button>
                             </div>
                         </div>
-
                         <div className="filterSection__filter-container">
                             {options?.map((group, i) =>
                                 <div className="filterSection__filter-group">
                                     <div className="filterSection__category-container">
-                                        <div className={`container-option grey open ${i === 0 && 'first'}`}>
+                                        <div className={`container-option grey ${openFields.indexOf(i) != -1 && 'open'} ${i === 0 && 'first'}`}>
                                             <div className="filterSection__accordion-title">
-                                                <span>
+                                                <span onClick={() => addField(i)}>
                                                     <span className="arrow"><ArrowDownIcon /></span>
                                                     <p className="option-name">{group.label}</p>
                                                 </span>
